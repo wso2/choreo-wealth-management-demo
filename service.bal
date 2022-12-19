@@ -4,8 +4,8 @@ import ballerina/log;
 
 
 
-configurable accountServiceClientId = ?;
-configurable accountServiceClientSecret = ?;
+configurable string accountServiceClientId = ?;
+configurable string accountServiceClientSecret = ?;
 
 # A service representing a network-accessible API
 # bound to port `9090`.
