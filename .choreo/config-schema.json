@@ -1,1 +1,32 @@
-{"$schema":"http://json-schema.org/draft-07/schema#","type":"object","properties":{},"additionalProperties":false}
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "choreotestorganization": {
+        "type": "object",
+        "properties": {
+          "accountsandtransactions": {
+            "type": "object",
+            "properties": {
+              "accountServiceClientId": {
+                "type": "string",
+                "description": ""
+              },
+              "accountServiceClientSecret": {
+                "type": "string",
+                "description": ""
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "accountServiceClientId",
+              "accountServiceClientSecret"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "additionalProperties": false
+  }
+  
