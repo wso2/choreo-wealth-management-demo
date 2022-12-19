@@ -10,8 +10,7 @@ configurable string accountServiceClientSecret = ?;
 service / on new http:Listener(9090) {
 
     # A service to return accounts resource.
-    # + backendServiceClientID - Client ID of the bank backend servie.
-    # + backendServiceClientSecret - Client Secret of the bank backend servie.
+    # + customerId - accountID of the customer
     # + return - Account resource.
     resource function get accounts(string customerId) returns json|error {
         log:printInfo("retriveing accounts", customerId = customerId);
@@ -27,8 +26,7 @@ service / on new http:Listener(9090) {
     }
 
     # A service to return transaction resource.
-    # + backendServiceClientID - Client ID of the bank backend servie.
-    # + backendServiceClientSecret - Client Secret of the bank backend servie.
+    # + customerId - accountID of the customer
     # + return - Transaction resource.
     resource function get transactions(string customerId) returns json|error {
         log:printInfo("retriveing transactions", customerId = customerId);
