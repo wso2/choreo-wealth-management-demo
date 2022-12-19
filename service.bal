@@ -1,6 +1,11 @@
 import ballerina/http;
 import choreotestorganization/accountservice;
+import ballerina/log;
 
+
+
+configurable accountServiceClientId = ?;
+configurable accountServiceClientSecret = ?;
 
 # A service representing a network-accessible API
 # bound to port `9090`.
@@ -10,12 +15,14 @@ service / on new http:Listener(9090) {
     # + backendServiceClientID - Client ID of the bank backend servie.
     # + backendServiceClientSecret - Client Secret of the bank backend servie.
     # + return - Account resource.
-    resource function get accounts(@http:Header string backendServiceClientID, @http:Header string backendServiceClientSecret) returns json|error {
+    resource function get accounts(string customerId) returns json|error {
+        log:printInfo("retriveing accounts", customerId = customerId);
+        
         if (!(backendServiceClientID is "" || backendServiceClientSecret is "")) {
             accountservice:Client accountserviceEp = check new (config = {
                 auth: {
-                    clientId: backendServiceClientID,
-                    clientSecret: backendServiceClientSecret
+                    clientId: accountServiceClientId,
+                    clientSecret: accountServiceClientSecret
                 }
             });
             json getAccountsResponse = check accountserviceEp->getAccounts();
@@ -29,12 +36,14 @@ service / on new http:Listener(9090) {
     # + backendServiceClientID - Client ID of the bank backend servie.
     # + backendServiceClientSecret - Client Secret of the bank backend servie.
     # + return - Transaction resource.
-    resource function get transactions(@http:Header string backendServiceClientID, @http:Header string backendServiceClientSecret) returns json|error {
+    resource function get transactions(string customerId) returns json|error {
+        log:printInfo("retriveing transactions", customerId = customerId);
+
         if (!(backendServiceClientID is "" || backendServiceClientSecret is "")) {
             accountservice:Client accountserviceEp = check new (config = {
                 auth: {
-                    clientId: backendServiceClientID,
-                    clientSecret: backendServiceClientSecret
+                    clientId: accountServiceClientId,
+                    clientSecret: accountServiceClientSecret
                 }
             });
             json getTransactionsResponse = check accountserviceEp->getTransactions();
