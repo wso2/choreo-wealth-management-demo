@@ -1,5 +1,5 @@
 import ballerina/http;
-
+import choreotestorganization/accountservice;
 import ballerina/log;
 
 configurable string accountServiceClientId = ?;
