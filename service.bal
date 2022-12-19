@@ -43,4 +43,10 @@ service / on new http:Listener(9090) {
             return error("client ID or client secret can not be empty!");
         }
     }
+
+    resource function get health() returns json {
+        return { "status": "UP" };
+    }
+
+
 }
