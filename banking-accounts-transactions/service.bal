@@ -78,22 +78,6 @@ type Accounts record {
 # bound to port `9090`.
 service / on new http:Listener(9090) {
 
-    # A service to return accounts resource.
-    # + customerId - accountID of the customer
-    # + return - Account resource.
-    resource function get accounts(string customerId) returns Accounts|error {
-        log:printInfo("retriveing accounts", customerId = customerId);
-
-        accountservice:Client accountserviceEp = check new (config = {
-            auth: {
-                clientId: accountServiceClientId,
-                clientSecret: accountServiceClientSecret
-            }
-        });
-        json getAccountsResponse = check accountserviceEp->getAccounts();
-        return getAccountsResponse.cloneWithType(Accounts);
-    }
-
     # A service to return transaction resource.
     # + customerId - accountID of the customer
     # + return - Transaction resource.
