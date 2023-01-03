@@ -1,9 +1,0 @@
-[build-options]
-  observabilityIncluded = true
-
-[package]
-  distribution = "2201.2.3"
-  name = "accountsandtransactions"
-  org = "choreotestorganization"
-  version = "0.1.0"
-
