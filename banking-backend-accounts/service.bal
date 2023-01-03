@@ -8,7 +8,7 @@ service / on new http:Listener(9090) {
     # A resource for getting account information.
     #
     # + return - account information.
-    resource function get accounts() returns Accounts|error {
+    resource function get accounts(string customerId) returns Accounts|error {
 
         json accountResponse =
         {

@@ -7,7 +7,7 @@ service / on new http:Listener(9090) {
     # A resource for getting transaction information.
     #
     # + return - transaction information.
-    resource function get transactions() returns Transactions|error {
+    resource function get transactions(string accountId) returns Transactions|error {
 
         json transactionResponse =
         {
