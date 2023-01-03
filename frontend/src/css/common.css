@@ -1,0 +1,46 @@
+.nav-bar-custom {
+    --bs-bg-opacity: 1;
+    background-color: var(--primary) !important;
+}
+
+.Footer {
+    background-color: var(--primary) !important;
+    color: var(--enabled);
+    height: 4rem;
+    display: flex;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed
+}
+
+.font-theme-light {
+    color: var(--enabled) !important;
+}
+
+#section-right .nav-link {
+    color: var(--enabled) !important;
+}
+
+#section-left .nav-link {
+    color: var(--enabled) !important;
+    font-size: 1rem;
+}
+
+#section-left .nav-link.active {
+    color: var(--secondary) !important;
+}
+
+body {
+    height: 100vh;
+}
+
+#root {
+    height: 100vh;
+}
+
+.App {
+    overflow: scroll;
+    height: 100%;
+}

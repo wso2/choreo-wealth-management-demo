@@ -1,0 +1,242 @@
+.home-container {
+    background-color: #d7e2de;
+    overflow: scroll;
+    display: block;
+}
+
+.mb-lg {
+    margin-bottom: 5rem !important;
+}
+
+.float-child {
+    width: 50%;
+    float: left;
+}
+
+.slider-container {
+    margin: 0.5rem;
+    height: 15rem;
+    border-radius: 15px;
+    background-color: #ffffff;
+}
+
+.slider-image {
+    border-radius: 15px;
+    object-fit: cover;
+    height: 15rem;
+}
+
+.main-acc-container {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    background-color: white;
+    border-radius: 15px;
+    height: 15rem;
+    background-position: +192px 26%; 
+    background-size: 128%;
+    background-repeat: no-repeat;
+  }
+
+.transaction-list-container {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    background-color: white;
+    border-radius: 15px;
+    height: 20rem;
+    overflow: scroll;
+}
+
+
+.font-size-small {
+    font-size: 0.85rem;
+}
+
+.font-size-medium {
+    font-size: 0.95rem;
+}
+
+.font-color-orange {
+    color: #ff7300
+}
+
+.font-color-white {
+    color: #ffffff
+}
+
+.font-color-grey {
+    color: #465867
+}
+
+.font-color-dark {
+    color: #212a32
+}
+
+.transfer-button {
+    background-color: #465867;
+    border-color: #465867;
+    color: #ffffff;
+    margin: 0 0.75rem;
+    width: 8rem;
+    font-size: 0.8rem;
+    height: 2rem;
+}
+
+.btn-grey {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #465867;
+    --bs-btn-border-color:  #465867;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg:  #465867;
+    --bs-btn-hover-border-color: #465867;
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg:  #465867;
+    --bs-btn-active-border-color:  #465867;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #465867;
+    --bs-btn-disabled-border-color: #465867;
+}
+
+.text-align-left {
+    float: left;
+    text-align: left;
+}
+
+.text-align-right {
+    float: right;
+    text-align: right;
+}
+
+.account-list-view {
+    margin: 0.5rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    height: 8rem;
+}
+
+.account-list-button {
+    margin: 0.5rem;
+    background-color: var(--secondary);
+    border-radius: 8px;
+    height: 8rem;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.account-list-button:hover {
+    background-color: var(--primary);
+}
+
+.account-detail-view {
+    margin: 0.5rem;
+    height: 50%;
+}
+
+.plus-icon {
+    text-align: center;
+    font-size: 20px;
+    padding: 0.5rem 0;
+    color: #ffffff;
+}
+
+.new-bank-button {
+    color: #ffffff;
+    width: 8rem;
+    height: auto;
+    font-size: 0.95rem;
+    margin: auto;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg:  transparent;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: transparent;
+}
+
+.no-padding-element {
+    padding: 0 0 !important;
+}
+
+.transaction-list-card {
+    border: 2px groove rgba(170, 167, 167, 0.16);
+    border-radius: 15px;
+    margin-bottom: 0.5rem;
+    overflow: auto;
+}
+
+.pie-chart-view {
+    display: flex;
+    text-align: -webkit-center;
+}
+
+.expense-list-view {
+    border-color: transparent;
+    text-align: left !important;
+    overflow: scroll;
+}
+
+.expense-list-icon {
+    margin-right: 0.2rem;
+}
+
+.money-transfer-form {
+    border: 2px #212a32 solid;
+    padding: 1rem;
+}
+
+.money-transfer-form-fields {
+    padding:0.5rem
+}
+
+.submit-btn {
+    border-radius: 5px;
+    height: 2rem;
+    border: transparent;
+    background-color: #465867;
+    color: #ffffff;
+    margin: 0.5rem;
+    width: 7rem;
+    font-size: 10px;
+}
+
+.transaction-list {
+    height: 4rem;
+}
+
+.money-transfer-form-inputs {
+    width: 300px;
+    height: 2rem;
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    background-color: white;
+}
+
+.add-bank-div {
+    text-align: center;
+}
+
+.transaction-view-logo {
+    height: 40%;
+    width: 40%;
+}
+
+.pie-chart-box {
+    display: flex;
+    alignItems: center;
+    justifyContent: space-evenly;
+    flexWrap: wrap;
+}
+
+/*align-items:center*/
+
+
+/*#292929*/
+/*#efefef*/
+/*#ff7300*/
+/*#595B5F*/

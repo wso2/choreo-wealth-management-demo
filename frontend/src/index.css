@@ -1,0 +1,62 @@
+:root {
+  --primary: #1D3557;
+  --secondary: #457B9D;
+  --enabled: #A8DADC;
+  --disabled: #EEEEEE;
+  --dark: #000;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--disabled);
+  color: var(--primary);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#bank-card .social-link {
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--dark);
+  background-color: var(--enabled) !important;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+#bank-card .social-link:hover, .social-link:focus {
+  background: var(--secondary);
+  text-decoration: none;
+  background-color: var(--secondary) !important;
+}
+
+.bg-enabled {
+  background-color: var(--enabled) !important;
+}
+
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+
+.bg-secondary {
+  background-color: var(--secondary) !important;
+}
+
+#contoso-logo {
+  width: 256;
+  height: 24;
+  font-weight: bolder;
+  color: var(--secondary);
+}
