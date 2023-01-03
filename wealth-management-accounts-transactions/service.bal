@@ -79,10 +79,10 @@ type Accounts record {
 service / on new http:Listener(9090) {
 
     # A service to return transaction resource.
-    # + customerId - accountID of the customer
+    # + accountId - accountID of the customer
     # + return - Transaction resource.
-    resource function get transactions(string customerId) returns Transactions|error {
-        log:printInfo("retriveing transactions", customerId = customerId);
+    resource function get transactions(string accountId) returns Transactions|error {
+        log:printInfo("retriveing transactions", accountId = accountId);
 
         accountservice:Client accountserviceEp = check new (config = {
             auth: {

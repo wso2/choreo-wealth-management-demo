@@ -1,0 +1,8 @@
+[package]
+org = "sachini"
+name = "wealth_management_accounts_transactions"
+version = "0.1.0"
+distribution = "2201.2.3"
+
+[build-options]
+observabilityIncluded = true
