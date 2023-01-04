@@ -1,5 +1,12 @@
 import ballerina/http;
 
+table<Transaction> key(TransactionId) AccountTransactions = table [
+    {AccountId: "30080012343456", TransactionId: "12323", TransactionReference: "Food", CreditDebitIndicator: "Debit", BookingDateTime: "2022-04-05T10:43:07+00:00", ValueDateTime: "2022-09-05T10:45:22+00:00", TransactionInformation: "Restaurant Bill", Amount: "1230.00", Currency: "USD"},
+    {AccountId: "15687012313256", TransactionId: "456231", TransactionReference: "Clothing", CreditDebitIndicator: "Debit", BookingDateTime: "2022-05-05T10:43:07+00:00", ValueDateTime: "2022-10-12T10:45:22+00:00", TransactionInformation: "Bill from the City Center", Amount: "200.00", Currency: "USD"},
+    {AccountId: "15687012313258", TransactionId: "62723", TransactionReference: "Health", CreditDebitIndicator: "Debit", BookingDateTime: "2017-04-05T10:43:07+00:00", ValueDateTime: "2022-11-05T10:45:22+00:00", TransactionInformation: "Medical checkup", Amount: "100.00", Currency: "USD"},
+    {AccountId: "16687012313257", TransactionId: "80313", TransactionReference: "Bills", CreditDebitIndicator: "Debit", BookingDateTime: "2017-04-05T10:43:07+00:00", ValueDateTime: "2022-11-25T10:45:22+00:00", TransactionInformation: "Paid iCloud Subscription", Amount: "900.00", Currency: "USD"}
+
+];
 
 # A service representing a network-accessible API
 # bound to port `9090`.
@@ -8,24 +15,14 @@ service / on new http:Listener(9090) {
     # A resource for getting transaction information.
     #
     # + return - transaction information.
-    resource function get transactions(string accountId) returns TransactionList|error {
+    resource function get transactions(string accountId) returns Transaction[]|error {
 
-        table<Transaction> key(TransactionId) AccountTransactions = table [
-        {AccountId : "12345678" , TransactionId : "12323" , TransactionReference : "Food",  CreditDebitIndicator : "Debit" , BookingDateTime: "2022-04-05T10:43:07+00:00" , ValueDateTime: "2022-09-05T10:45:22+00:00" , TransactionInformation: "Restaurant Bill", Amount : "1230.00", Currency : "USD" },
-        {AccountId : "10335678" , TransactionId : "456231" , TransactionReference : "Clothing",  CreditDebitIndicator : "Debit" , BookingDateTime: "2022-05-05T10:43:07+00:00" , ValueDateTime: "2022-10-12T10:45:22+00:00" , TransactionInformation: "Bill from the City Center", Amount : "200.00", Currency : "USD" },
-        {AccountId : "10335678" , TransactionId : "62723" , TransactionReference : "Health",  CreditDebitIndicator : "Debit" , BookingDateTime: "2017-04-05T10:43:07+00:00" , ValueDateTime: "2022-11-05T10:45:22+00:00" , TransactionInformation: "Medical checkup", Amount : "100.00", Currency : "USD" },
-        {AccountId : "10335678" , TransactionId : "80313" , TransactionReference : "Bills",  CreditDebitIndicator : "Debit" , BookingDateTime: "2017-04-05T10:43:07+00:00" , ValueDateTime: "2022-11-25T10:45:22+00:00" , TransactionInformation: "Paid iCloud Subscription", Amount : "900.00", Currency : "USD"}
-
-    ];
-
-        var transactions = table key(TransactionId) from var e in AccountTransactions where e.AccountId == accountId select e;
-        return  transactions.cloneWithType(TransactionList);
+        Transaction[] transactions = from var e in AccountTransactions
+            where e.AccountId == accountId
+            select e;
+        return transactions;
     }
 }
-
-type TransactionList record {
-    Transaction[] Transactions;
-};
 
 type Transaction record {
     string AccountId;
@@ -37,5 +34,5 @@ type Transaction record {
     string TransactionInformation;
     string Amount;
     string Currency;
-   
+
 };
