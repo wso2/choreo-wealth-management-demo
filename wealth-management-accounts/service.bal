@@ -1,5 +1,7 @@
 import ballerina/http;
 import ballerina/time;
+import ballerina/io;
+
 
 # A service representing a network-accessible API
 # bound to port `9090`.
@@ -17,6 +19,7 @@ service / on new http:Listener(9090) {
         ];
 
         var accounts = table key(CustomerID) from var e in Accounts where e.CustomerID == customerId select e;
+        io:println(accounts);
         return  accounts.cloneWithType(AccountList);
 
     }
