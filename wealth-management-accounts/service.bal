@@ -2,7 +2,6 @@ import ballerina/http;
 import ballerina/time;
 import ballerina/io;
 
-
 # A service representing a network-accessible API
 # bound to port `9090`.
 service / on new http:Listener(9090) {
@@ -10,21 +9,24 @@ service / on new http:Listener(9090) {
     # A resource for getting account information.
     #
     # + return - account information.
-    resource function get accounts(string customerId) returns AccountList|error {
+    resource function get accounts(string customerId, string bankId, string accountType) returns AccountInformation[]|error {
 
-        table<AccountInformation> key(CustomerID) Accounts = table [
-            { "CustomerID": "001","AccountId" : "30080012343456", "BankID" : "1", "AccountType": "Personal" , "Status": "Enabled" , "StatusUpdateDateTime": time:utcToString(time:utcNow()) , "Currency" : "USD" , "AccountSubType": "CurrentAccount" , "Nickname": "Bills", "OpeningDate" : "2020-12-16T06:06:06+00:00" , "MaturityDate": "2025-04-16T06:06:06+00:00" , "Balance": "$1975.23" , "Name": "Alex Karter", "SecondaryIdentification": "00021"},
-            { "CustomerID": "002", "AccountId" : "15687012313256", "BankID" : "2" ,"AccountType": "Joint" , "Status": "Enabled" , "StatusUpdateDateTime": time:utcToString(time:utcNow()) , "Currency" : "USD" , "AccountSubType": "CurrentAccount" , "Nickname": "Bills", "OpeningDate" : "2020-12-16T06:06:06+00:00" , "MaturityDate": "2025-04-16T06:06:06+00:00" , "Balance": "$4567.23" , "Name": "Alex Karter", "SecondaryIdentification": "00021"}
+        table<AccountInformation> key(CustomerID) accounts = table [
+            {CustomerID: "001", AccountId: "30080012343456", BankID: "1", AccountType: "Personal", Status: "Enabled", StatusUpdateDateTime: time:utcToString(time:utcNow()), Currency: "USD", AccountSubType: "CurrentAccount", Nickname: "Bills", OpeningDate: "2020-12-16T06:06:06+00:00", MaturityDate: "2025-04-16T06:06:06+00:00", Balance: "$1975.23", Name: "Alex Karter", SecondaryIdentification: "00021"},
+            {CustomerID: "002", AccountId: "15687012313256", BankID: "2", AccountType: "Joint", Status: "Enabled", StatusUpdateDateTime: time:utcToString(time:utcNow()), Currency: "USD", AccountSubType: "CurrentAccount", Nickname: "Bills", OpeningDate: "2020-12-16T06:06:06+00:00", "MaturityDate": "2025-04-16T06:06:06+00:00", Balance: "$4567.23", Name: "Alex Karter", SecondaryIdentification: "00021"}
 
         ];
 
-        var accounts = table key(CustomerID) from var e in Accounts where e.CustomerID == customerId select e;
+        AccountInformation[] accountInfo = from var e in accounts
+            where e.CustomerID == customerId
+            where e.BankID == bankId
+            where e.AccountType == accountType
+            select e;
         io:println(accounts);
-        return  accounts.cloneWithType(AccountList);
+        return accountInfo;
 
     }
 }
-
 
 type AccountInformation record {
     readonly string CustomerID;
@@ -41,9 +43,5 @@ type AccountInformation record {
     string Balance;
     string Name;
     string SecondaryIdentification;
-};
-
-type AccountList record {
-    AccountInformation[] Accounts;
 };
 
