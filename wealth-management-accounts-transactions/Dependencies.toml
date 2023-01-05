@@ -98,9 +98,6 @@ dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.value"}
 ]
-modules = [
-	{org = "ballerina", packageName = "io", moduleName = "io"}
-]
 
 [[package]]
 org = "ballerina"
@@ -195,6 +192,9 @@ dependencies = [
 	{org = "ballerina", name = "lang.value"},
 	{org = "ballerina", name = "observe"}
 ]
+modules = [
+	{org = "ballerina", packageName = "log", moduleName = "log"}
+]
 
 [[package]]
 org = "ballerina"
@@ -260,9 +260,6 @@ version = "2.2.3"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"}
 ]
-modules = [
-	{org = "ballerina", packageName = "time", moduleName = "time"}
-]
 
 [[package]]
 org = "ballerina"
@@ -286,16 +283,28 @@ modules = [
 
 [[package]]
 org = "choreotestorganization"
-name = "wealth_management_accounts"
+name = "accountservice"
+version = "1.0.0"
+dependencies = [
+	{org = "ballerina", name = "http"},
+	{org = "ballerina", name = "url"}
+]
+modules = [
+	{org = "choreotestorganization", packageName = "accountservice", moduleName = "accountservice"}
+]
+
+[[package]]
+org = "choreotestorganization"
+name = "wealth_management_accounts_transactions"
 version = "0.1.0"
 dependencies = [
 	{org = "ballerina", name = "http"},
-	{org = "ballerina", name = "io"},
-	{org = "ballerina", name = "time"},
-	{org = "ballerinai", name = "observe"}
+	{org = "ballerina", name = "log"},
+	{org = "ballerinai", name = "observe"},
+	{org = "choreotestorganization", name = "accountservice"}
 ]
 modules = [
-	{org = "choreotestorganization", packageName = "wealth_management_accounts", moduleName = "wealth_management_accounts"}
+	{org = "choreotestorganization", packageName = "wealth_management_accounts_transactions", moduleName = "wealth_management_accounts_transactions"}
 ]
 
 
