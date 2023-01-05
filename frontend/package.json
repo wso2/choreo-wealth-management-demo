@@ -16,9 +16,10 @@
     "react-horizontal-scrolling-menu": "^3.2.3",
     "react-loading-skeleton": "^3.1.0",
     "react-responsive-carousel": "^3.2.23",
-    "react-router-dom": "^6.4.3",
+    "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
     "recharts": "^2.1.16",
+    "sass": "^1.57.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -46,6 +47,6 @@
     ]
   },
   "overrides": {
-    "react-router-dom": "^6.4.3"
+    "react-router-dom": "^6.6.1"
   }
 }
