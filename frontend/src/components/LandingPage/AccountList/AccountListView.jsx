@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react'
-import '../../../css/LandingPage.css'
+import React, {useEffect, useState} from 'react';
 import AccountData from "../../../data/AccountData.json";
 import {Button} from "react-bootstrap";
 import {getAccounts} from "../../../services/account-transaction-service";

@@ -1,5 +1,4 @@
-import React from 'react'
-import '../../css/LandingPage.css'
+import React from 'react';
 
 import {AccountListView} from "./AccountList/AccountListView";
 import {TransactionListView} from "./TransactionList/TransactionListView"

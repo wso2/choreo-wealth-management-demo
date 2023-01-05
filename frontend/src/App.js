@@ -7,7 +7,7 @@ import { Logout } from "./components/Logout/Logout";
 
 function App() {
  return (
-    <div className="App" style={{background:'#d7e2de'}}>
+    <div>
       <Routes>
         <Route path="/" element={ <Login/> } />
         <Route path="/login" element={ <Login/> } />

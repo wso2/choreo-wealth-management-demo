@@ -1,61 +1,61 @@
-import '../../css/LoginNew.css'
-import applogo from "../../images/favicon.png";
-import Asgardeo from "../../images/Asgardeo.svg";
-import { useAuthContext } from "@asgardeo/auth-react";
-import fb from "../../images/facebook.svg";
-import google from "../../images/google.svg";
+import { Container, Row, Col }from 'react-bootstrap';
+import asgardeoLogo from "../../assets/images/asgardeo.svg";
+import illustration from "../../assets/images/illustration.svg";
+import {useAuthContext} from "@asgardeo/auth-react";
+import facebookLogo from "../../assets/images/facebook.svg";
+import googleLogo from "../../assets/images/google.svg";
 
-export function  LoginAsgardeo() {
-const { state, signIn, signOut } = useAuthContext();
+export function LoginAsgardeo() {
+    const {state, signIn, signOut} = useAuthContext();
 
 return (
-<div class="container">
-	<div class="screen">
-		<div class="screen__content">
-		    <div>
-		     <img src={applogo} class="app-logo fab fa-facebook"></img>
-		    </div>
-			<form class="login">
-
-				<div class="login__field">
-					<i class="login__icon fas fa-user"></i>
-					<input type="text" class="login__input" placeholder="Username / Email"/>
+	<Container>
+		<Row>
+			<Col lg={4} className="d-none d-md-none d-lg-block login-side-wrapper">
+				<img src={illustration} alt="login illustration" />
+			</Col>
+			<Col lg={8} xs={12} className="login-wrapper">
+				<div className="login-header__container">
+					<h3>Sign in to Continue</h3>
 				</div>
-				<div class="login__field">
-					<i class="login__icon fas fa-lock"></i>
-					<input type="password" class="login__input" placeholder="Password"/>
+				<div className="login-form__container">
+					<form>
+                        <div className="form-group">
+                            <label className="form-label" htmlFor="formGroupEmail">Email</label>
+                            <input type="text" className="form-control" id="formGroupEmail"
+                                   placeholder="Email" />
+                        </div>
+                        <div className="form-group">
+                            <label className="form-label" htmlFor="formGroupPassword">Password</label>
+                            <input type="text" className="form-control" id="formGroupPassword"
+                                   placeholder="Password" />
+                        </div>
+						<div className="form-group">
+							<button type="button" className="form-button btn btn-primary">
+								Sign In
+							</button>
+						</div>
+						<div className="form-group login-separator">
+							<span>or</span>
+						</div>
+						<div className="form-group login-social__container">
+							<button type="button" className="form-image-button btn btn-primary">
+								<img src={facebookLogo} alt="facebook icon"/>
+								<span>Facebook</span>
+							</button>
+							<button type="button" className="form-image-button btn btn-primary">
+								<img src={googleLogo} alt="google icon"/>
+								<span>Google</span>
+							</button>
+							<button type="button" className="form-image-button btn btn-primary" onClick={() => signIn()}>
+								<img src={asgardeoLogo} alt="asgardeo logo"/>
+								<span>Asgardeo</span>
+							</button>
+						</div>
+					</form>
 				</div>
-				<button class="button login__submit">
-					<span class="button__text">Sign In</span>
-					<i class="button__icon fas fa-chevron-right"></i>
-				</button>
-			</form>
-			<div class="social-login">
-				<h4>Sign In With</h4>
-				<div class="social-icons">
-				    <img src={fb} class="social-login__icon fab fa-facebook"></img>
-				    <img src={google} class="social-login__icon fab fa-instagram"></img>
-                    <img onClick={ () => signIn() } src={Asgardeo} class="asgardeo__icon fab fa-facebook"></img>
-				    <img  class="asgardeo__icon fab fa-instagram"></img>
-
-				</div>
-			</div>
-		</div>
-		<div class="screen__background">
-			<span class="screen__background__shape screen__background__shape4"></span>
-			<span class="screen__background__shape screen__background__shape3"></span>
-			<span class="screen__background__shape screen__background__shape2"></span>
-			<span class="screen__background__shape screen__background__shape1"></span>
-		</div>
-	</div>
-</div>
-
-
-
-
-
-
-);
-
-
-};
+			</Col>
+		</Row>
+	</Container>
+    );
+}

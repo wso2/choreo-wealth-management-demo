@@ -1,4 +1,4 @@
-import '../../css/common.css';
+
 
 export const Navbar = ({ selectedTabName }) => {
   return (

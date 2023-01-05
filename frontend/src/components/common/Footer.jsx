@@ -1,6 +1,5 @@
 import React from 'react'
-import '../../css/common.css'
-import Container from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Col';
 
 export const Footer = () => {
 
