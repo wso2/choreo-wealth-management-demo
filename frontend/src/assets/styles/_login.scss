@@ -46,7 +46,7 @@
 
    .form-image-button {
     align-items: center;
-    background-color: color.$white;
+    background-color: white;
     border: 1px solid color.$accent;
     color: color.$text;
     display: flex;
@@ -65,7 +65,7 @@
     position: relative;
 
     span {
-     background-color: color.$white;
+     background-color: white;
      padding: 0 0.5em;
      position: absolute;
      top: -0.75em;
