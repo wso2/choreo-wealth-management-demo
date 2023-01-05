@@ -1,0 +1,86 @@
+@use "color";
+@use "base";
+
+.login-side-wrapper {
+ background-color: color.$background;
+ padding: 0;
+ text-align: center;
+ height: 100vh;
+
+ img {
+  height: inherit;
+ }
+}
+
+.login-wrapper {
+ padding: 10% 18%;
+
+ .login-header__container {
+  margin-bottom: 2em;
+
+  h3 {
+   font-weight: 700;
+  }
+ }
+
+ .login-form__container {
+  .form-group {
+   margin-bottom: 0.5em;
+
+   .form-label {
+    color: color.$text;
+    font-weight: 400;
+   }
+
+   .form-control,
+   .form-button,
+   .form-image-button {
+    height: 2.5em;
+   }
+
+   .form-button {
+    background-color: color.$primary;
+    margin-top: 1em;
+    width: 100%;
+   }
+
+   .form-image-button {
+    align-items: center;
+    background-color: color.$white;
+    border: 1px solid color.$accent;
+    color: color.$text;
+    display: flex;
+    gap: 0.4em;
+    justify-content: center;
+    width: 100%;
+
+    img {
+     height: 1em;
+    }
+   }
+
+   &.login-separator {
+    border-top: 1px solid darken(color.$background, 10%);
+    margin-top: 2em;
+    position: relative;
+
+    span {
+     background-color: color.$white;
+     padding: 0 0.5em;
+     position: absolute;
+     top: -0.75em;
+     left: 50%;
+     margin-left: -1.3em;
+    }
+   }
+  }
+ }
+
+ .login-social__container {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 2em 0;
+  gap: 0.5em;
+ }
+}

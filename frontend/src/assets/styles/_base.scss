@@ -1,0 +1,58 @@
+@use "color";
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;900&display=swap');
+
+/// Font face
+$font-family-data: (
+ 'Nunito', -apple-system,
+ 'BlinkMacSystemFont',
+ 'San Francisco',
+ 'Roboto',
+ 'Segoe UI',
+ 'Helvetica Neue',
+ san-serif
+);
+
+html {
+ -webkit-text-size-adjust: none;
+ font-size: 62.5%;
+ height: 100%;
+}
+
+// Font smoothing
+html,
+body,
+input,
+textarea,
+button {
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+ text-shadow: 1px 1px 1px rgba(0, 0, 0, .004);
+}
+
+html,
+body {
+ color: color.$text;
+ font-family: $font-family-data;
+ font-size: 14px;
+ font-weight: 400;
+}
+
+code {
+ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+ monospace;
+}
+
+body,
+#root {
+ height: 100vh;
+ overflow: hidden auto;
+}
+
+.container {
+ margin: 0;
+ max-width: 100vw;
+
+ .row {
+  width: inherit;
+ }
+}
