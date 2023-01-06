@@ -1,13 +1,11 @@
 import ballerina/http;
-import choreotestorganization/accountservice;
+import choreotestorganization/wealthmanagementtransactions;
 import ballerina/log;
+
 
 configurable string transactionServiceClientId = ?;
 configurable string transactionServiceClientSecret = ?;
 
-type TransactionList record {
-    Transaction[] Transactions;
-};
 
 type Transaction record {
     string AccountId;
@@ -22,7 +20,6 @@ type Transaction record {
    
 };
 
-
 # A service representing a network-accessible API
 # bound to port `9090`.
 service / on new http:Listener(9090) {
@@ -30,17 +27,17 @@ service / on new http:Listener(9090) {
     # A service to return transaction resource.
     # + accountId - accountID of the customer
     # + return - Transaction resource.
-    resource function get transactions(string accountId) returns TransactionList|error {
+    resource function get transactions(string accountId) returns wealthmanagementtransactions:Transaction[]|error {
         log:printInfo("retriveing transactions", accountId = accountId);
 
-        accountservice:Client accountserviceEp = check new (config = {
+        wealthmanagementtransactions:Client transactionsService = check new (config = {
             auth: {
                 clientId: transactionServiceClientId,
                 clientSecret: transactionServiceClientSecret
             }
         });
-        json getTransactionsResponse = check accountserviceEp->getTransactions();
-        return getTransactionsResponse.cloneWithType(TransactionList);
+        wealthmanagementtransactions:Transaction[] getTransactionsResponse = check transactionsService->getTransactions(accountId);
+        return getTransactionsResponse;
     }
 
 }

@@ -17,6 +17,7 @@ service / on new http:Listener(9090) {
     #
     # + return - account information.
     resource function get accounts(string customerId, string bank, string accountType) returns AccountInformation[]|error {
+        
 
         AccountInformation[] accountInfo = from var e in accounts
             where e.CustomerID == customerId
