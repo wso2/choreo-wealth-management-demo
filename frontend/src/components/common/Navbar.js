@@ -4,12 +4,6 @@ export const Navbar = ({ selectedTabName }) => {
   return (
     <nav className="navbar navbar-expand-sm nav-bar-custom m-2">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
-          <span id="contoso-logo">
-            CONTOSO <img src="favicon.svg" alt="Logo" height="24" className="d-inline-block align-text-top"/> CENTRAL
-          </span>
-          {" "}
-        </a>
 
         {/* section - navbar tabs */}
         <div id="section-left" className="collapse navbar-collapse">
@@ -43,18 +37,7 @@ export const Navbar = ({ selectedTabName }) => {
         {/* section - user profile content */}
         <div id="section-right">
           <ul className="navbar-nav fs-3">
-            <li className="nav-item mx-1">
-              <a className="nav-link bi bi-gear" href="#">
-              </a>
-            </li>
 
-            <li className="nav-item mx-1">
-              <a className="nav-link bi bi-envelope" href="#"></a>
-            </li>
-
-            <li className="nav-item mx-1">
-              <a className="nav-link bi bi-bell" href="#"></a>
-            </li>
 
             <li className="nav-item dropdown-center mx-1">
               <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -1,36 +1,30 @@
 import React from 'react';
-
+import { Row, Col } from 'react-bootstrap'
 import {AccountListView} from "./AccountList/AccountListView";
 import {TransactionListView} from "./TransactionList/TransactionListView"
-import {ExpenseView} from "./ExpenseView/ExpenseView"
-import { Navbar } from '../common/Navbar';
+import {ExpenseView} from "./ExpenseView/ExpenseView";
+import { Header } from '../common/Header';
+import { SidePanel } from '../common/SidePanel';
 import { Footer } from '../common/Footer';
-import { ProfileView } from './ProfileView';
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 
 export const LandingPage = () => {
 
   return(
-    <>
-      <Navbar selectedTabName="Overview" />
-      <div className="container-md home-container">
-        <div style={{height:'20%'}}>
-          <ProfileView />
-        </div>
-
-        <div className="mb-3" style={{height:'20%'}}>
-          <AccountListView />
-        </div>
-        
-        <div style={{height:'60%'}}>
-          <div className='float-child' style={{width:'50%'}}>
-            <TransactionListView />
-          </div>
-          <div className='float-child' style={{width:'49%'}}>
-            <ExpenseView/>
-          </div>
+    <div className="main-layout">
+      <Header/>
+      <div className="child-layout d-flex flex-row">
+        <SidePanel selectedTabName="Overview" />
+        <div className="content-layout p-4">
+            <ProfileInfo/>
+            <AccountListView />
+            <Row className="row mb-4">
+                <Col lg={7}><TransactionListView /></Col>
+                <Col lg={5}><ExpenseView/></Col>
+            </Row>
+            <Footer />
         </div>
       </div>
-      <Footer />
-    </>
+    </div>
   )
 }

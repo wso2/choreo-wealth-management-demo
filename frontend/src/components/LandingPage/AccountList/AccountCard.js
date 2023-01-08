@@ -1,26 +1,19 @@
+import { Card, Image } from "react-bootstrap";
 import { loadBankLogoByNickName } from "../../../services/utils"
 
 export const AccountCard = ({account}) => {
-    return (
-        <div className="col pe-3">
-            <div className="account-list-view" style={{width: "228px"}}>
-            <div className="account-detail-view">
-                
-                <div className="row">
-                <div className="col-2 no-padding-element ms-2 mt-2">
-                    <img className="img-fluid rounded-circle" src={loadBankLogoByNickName(account.Nickname)} alt="bank-logo" />
-                </div>
-                
-                <div className="col-8 m-1 pt-2">
-                    <h6 className="font-size-small font-color-orange">{account.Nickname}</h6>
-                    <div className="font-size-small font-color-dark">{account.AccountId}</div>
-                </div>
 
-                </div>
-            
+    return (
+        <Card className="account-card-wrapper col me-3 p-4 personal" border="light">
+            <div className="d-flex align-items-center flex-row mb-1">
+                <Image roundedCircle={true} src={loadBankLogoByNickName(account.Nickname)} alt="bank-logo" height="30px"/>
+                <h3 className="account-balance">{account.Balance}</h3>
             </div>
-            <div className="account-detail-view font-color-dark text-align-right my-0">{account.Balance}</div>
+
+            <div className="account-details d-flex flex-column">
+                <h5 className="account-number">{account.AccountId}</h5>
+                <h6 className="account-name">{account.Nickname}</h6>
             </div>
-        </div>
+        </Card>
     )
 }
