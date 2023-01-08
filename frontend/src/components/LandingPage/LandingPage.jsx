@@ -18,8 +18,8 @@ export const LandingPage = () => {
         <div className="content-layout p-4">
             <ProfileInfo/>
             <AccountListView />
-            <Row className="row mb-4">
-                <Col lg={7}><TransactionListView /></Col>
+            <Row className="mb-4">
+                <Col lg={7}><TransactionListView/></Col>
                 <Col lg={5}><ExpenseView/></Col>
             </Row>
             <Footer />

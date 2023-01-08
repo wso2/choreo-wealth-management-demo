@@ -9,6 +9,11 @@
   }
 }
 
+.section-title {
+  color: color.$text;
+  font-weight: 700;
+}
+
 //Profile Section
 .profile-card {
   .profile-details {
@@ -106,11 +111,35 @@
 
     .add-account-button {
       background-color: transparent;
-      border: 2px dashed color.$primary;
+      border: 1px dashed color.$primary;
       color: color.$primary;
       font-size: 1.2em;
       height: 100%;
       width: 100%;
+    }
+  }
+}
+
+//Transaction section
+.transaction-list-container {
+
+}
+
+//Expense Section
+
+.expenses-chart-container {
+  .chart-data-wrapper {
+    .chart-data-title {
+      border-bottom: 1px solid color.$background;
+      color: lighten(black, 60%);
+      font-size: 0.95em;
+    }
+
+    .chart-data-value {
+      color: lighten(black, 10%);
+      font-size: 1.25em;
+      font-weight: 700;
+      padding-top: 0.5em;
     }
   }
 }
