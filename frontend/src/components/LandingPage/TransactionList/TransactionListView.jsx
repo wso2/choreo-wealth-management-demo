@@ -1,5 +1,5 @@
 import React from 'react'
-import { Accordion, Table, Image } from "react-bootstrap";
+import { Accordion, Table, Image, Card } from "react-bootstrap";
 import TransactionData from "../../../data/TransactionData.json";
 import { SkeletonTransaction } from './SkeletonTransaction';
 import { useState, useEffect } from "react";
@@ -30,7 +30,7 @@ export const TransactionListView = () => {
   const transactionDataConstant = loadTransactionsView(transactions);
 
   return (
-    <div className="transaction-list-container pe-3">
+    <Card className="transaction-list-container p-4" border="light">
       <h5 className="section-title mb-3">Recent Transactions</h5>
       <Accordion>
         <div className="transaction-list-card">
@@ -38,7 +38,7 @@ export const TransactionListView = () => {
           {loading && loadTransactionsSkeletons(transactions)}
         </div>
       </Accordion>
-    </div>
+    </Card>
   );
 }
 
@@ -57,7 +57,7 @@ const loadTransactionsView = (transactions) => {
     return (
       <Accordion.Item eventKey={id} key={id}>
         <Accordion.Header className="transaction-list">
-          <Image src={logoPath} alt="logo" className="transaction-view-logo" roundedCircle={true} height="36px"/>
+          <Image src={logoPath} alt="logo" className="transaction-view-logo me-2" roundedCircle={true} height="36px"/>
           <div className="col">{date}</div>
           <div className="col">{transaction.TransactionReference}</div>
           <div className="col">{transaction.CreditDebitIndicator}</div>
@@ -67,16 +67,16 @@ const loadTransactionsView = (transactions) => {
           <Table striped bordered hover>
             <tbody>
             <tr>
-              <td className="font-size-small font-color-dark">Transaction Id</td>
-              <td className="font-size-small font-color-dark">{transaction.TransactionId}</td>
+              <td>Transaction Id</td>
+              <td>{transaction.TransactionId}</td>
             </tr>
             <tr>
-              <td className="font-size-small font-color-dark">Account Id</td>
-              <td className="font-size-small font-color-dark">{transaction.AccountId}</td>
+              <td>Account Id</td>
+              <td>{transaction.AccountId}</td>
             </tr>
             <tr>
-              <td className="font-size-small font-color-dark">Transaction Information</td>
-              <td className="font-size-small font-color-dark">{transaction.TransactionInformation}</td>
+              <td>Transaction Information</td>
+              <td>{transaction.TransactionInformation}</td>
             </tr>
             </tbody>
           </Table>

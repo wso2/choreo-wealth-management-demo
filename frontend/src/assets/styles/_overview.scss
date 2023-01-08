@@ -122,7 +122,34 @@
 
 //Transaction section
 .transaction-list-container {
+  .transaction-list-card {
+    .accordion-item {
+      background: transparent;
+      border: none;
+      .accordion-header {
+        border-bottom: 1px solid color.$background;
+      }
+      .accordion-button {
+        border-radius: 0;
+        padding: 0.5em;
+        &:focus,
+        &:not(.collapsed) {
+          background-color: transparent;
+          box-shadow: none;
 
+        }
+        &:not(.collapsed) {
+          color: color.$primary;
+          font-weight: 600;
+        }
+      }
+      .accordion-collapse {
+        &.show {
+          border-bottom: 1px solid lighten(black, 90%);
+        }
+      }
+    }
+  }
 }
 
 //Expense Section
