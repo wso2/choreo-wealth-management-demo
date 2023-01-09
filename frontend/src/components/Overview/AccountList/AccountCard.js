@@ -1,10 +1,10 @@
 import { Card, Image } from "react-bootstrap";
-import { loadBankLogoByNickName } from "../../../services/utils"
+import { loadBankLogoByNickName, getBankCardStyle } from "../../../services/utils";
 
 export const AccountCard = ({account}) => {
 
     return (
-        <Card className="account-card-wrapper col me-3 p-5 personal" border="light">
+        <Card className={ "account-card-wrapper col me-3 p-5 "+ getBankCardStyle(account.Nickname)} border="light">
             <div className="d-flex align-items-center flex-row mb-1">
                 <Image roundedCircle={true} src={loadBankLogoByNickName(account.Nickname)} alt="bank-logo" height="30px"/>
                 <h3 className="account-balance">{account.Balance}</h3>

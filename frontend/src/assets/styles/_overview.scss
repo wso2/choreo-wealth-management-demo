@@ -77,17 +77,21 @@
 // Account Section
 .account-details-container {
   .account-card-wrapper {
-    background: linear-gradient(107.44deg, #92A3C4 13.54%, rgba(191, 202, 222, 0.7) 99.16%);
     border-radius: 12px;
     box-shadow: 0 0 17px 0 rgba(0,0,0,0.05);
     color: white;
 
-    &.personal {
-      background: linear-gradient(111.95deg, #2366CC 13.26%, rgba(35, 102, 204, 0.6) 77.61%);
+    &.contoso-retail-bank {
+      background: lighten(color.$con-retailer, 20%);
     }
-
-    &.joint {
-      background: linear-gradient(111.95deg, #23C2CC 13.26%, rgba(35, 194, 204, 0.6) 77.61%);;
+    &.contoso-sme-bank {
+      background: lighten(color.$con-sme, 20%);
+    }
+    &.contoso-corp-bank {
+      background: lighten(color.$con-cop, 20%);
+    }
+    &.contoso-investment {
+      background: lighten(color.$con-inv, 30%);
     }
 
     .account-balance {
