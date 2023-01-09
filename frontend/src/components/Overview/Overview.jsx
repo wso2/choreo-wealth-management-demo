@@ -4,7 +4,6 @@ import {AccountListView} from "./AccountList/AccountListView";
 import {Col, Row} from "react-bootstrap";
 import {TransactionListView} from "./TransactionList/TransactionListView";
 import {ExpenseView} from "./ExpenseView/ExpenseView";
-import {Footer} from "../common/Footer";
 
 export const Overview = () => {
     return (
