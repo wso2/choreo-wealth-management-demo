@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
+import { Card } from 'react-bootstrap';
 import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 import ExpenseData from "../../../data/ExpenseData.json";
-import { ListGroup } from "react-bootstrap";
 import { useState, useEffect } from 'react';
 import { CONSTANTS } from '../../../services/utils';
 import { getTransactions } from '../../../services/account-transaction-service';
@@ -45,30 +45,30 @@ export const ExpenseView = () => {
   var transactionDataConstant = loadTransactionsView(transactionInfo);
 
   return (
-    <div className="transaction-list-container">
-      <h5>All Expenses</h5>
+    <Card className="expenses-chart-container p-4" border="light">
+      <h5 className="section-title mb-3">All Expenses</h5>
       {transactionHeaderConstant}
-      <div className="p-2 font-size-small font-color-orange">Last Month</div>
+      <div className="p-2 text-center mb-2">Last Month</div>
       {transactionDataConstant}
-    </div>
+    </Card>
   )
 }
 
 const loadTransactionsHeaderView = (transactionInfo) => {
   if (transactionInfo || user_access_token == null) {
     return (
-      <div className="row">
+      <div className="row chart-data-wrapper pb-3">
         <div className="col-4">
-          <div className="font-size-small font-color-orange">Daily</div>
-          <div className="font-size-small font-color-dark">{daily}</div>
+          <div className="chart-data-title">Daily</div>
+          <div className="chart-data-value">{daily}</div>
         </div>
         <div className="col-4">
-          <div className="font-size-small font-color-orange">Weekly</div>
-          <div className="font-size-small font-color-dark">{weekly}</div>
+          <div className="chart-data-title">Weekly</div>
+          <div className="chart-data-value">{weekly}</div>
         </div>
         <div className="col-4">
-          <div className="font-size-small font-color-orange">Monthly</div>
-          <div className="font-size-small font-color-dark">{monthly}</div>
+          <div className="chart-data-title">Monthly</div>
+          <div className="chart-data-value">{monthly}</div>
         </div>
       </div>
     )
@@ -104,19 +104,19 @@ const renderCustomizedLabel = ({
 const loadTransactionsView = (transactionInfo) => {
 
   const colorScheme = [
-    '#ffc808',
-    '#ff7300',
-    '#f0a87d',
-    '#E79363',
-    '#EEE10D',
-    '#D9B991'
+    '#2366CC',
+    '#23C2CC',
+    '#272F82',
+    '#5C7095',
+    '#7B43C1',
+    '#438CC1'
   ];
 
   if (transactionInfo || user_access_token == null) {
     return (
-      <div className="pie-chart-view">
+      <div className="row pie-chart-view">
         <div className="col-8">
-          <PieChart width={150} height={150}>
+          <PieChart width={200} height={200}>
             <Pie className="pie-stroke-color"  data={ExpenseData} dataKey="amount" outerRadius={75} label={renderCustomizedLabel}>
               {
                 ExpenseData.map((entry, index) => <Cell key={index} fill={colorScheme[index % colorScheme.length]} />)
@@ -125,19 +125,20 @@ const loadTransactionsView = (transactionInfo) => {
             <Tooltip />
           </PieChart>
         </div>
-        <div className="col-4">
-          <ListGroup>
+        <div className="col-4 d-flex align-items-center">
+          <div>
             {
               ExpenseData.map((entry, index) =>
-                <ListGroup.Item key={index} className="expense-list-view font-size-small font-color-dark">
+                <div key={index} className="expense-list-view">
                   <i className="bi bi-square-fill expense-list-icon"
                     style={{ color: colorScheme[index % colorScheme.length] }}>
                   </i>
+                  <span> - </span>
                   {entry.name}
-                </ListGroup.Item>
+                </div>
               )
             }
-          </ListGroup>
+          </div>
         </div>
       </div>
     )

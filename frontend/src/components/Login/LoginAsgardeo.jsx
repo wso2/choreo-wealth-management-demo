@@ -1,7 +1,7 @@
 import { Container, Row, Col }from 'react-bootstrap';
 import asgardeoLogo from "../../assets/images/asgardeo.svg";
 import illustration from "../../assets/images/illustration.svg";
-import {useAuthContext} from "@asgardeo/auth-react";
+import { useAuthContext } from "@asgardeo/auth-react";
 import facebookLogo from "../../assets/images/facebook.svg";
 import googleLogo from "../../assets/images/google.svg";
 

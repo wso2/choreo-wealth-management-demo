@@ -4,8 +4,7 @@ import {Button} from "react-bootstrap";
 import {getAccounts} from "../../../services/account-transaction-service";
 import {CONSTANTS} from "../../../services/utils";
 import { SkeletonAccount } from './SkeletonAccount';
-import {useNavigate} from "react-router-dom";
-import { ScrollMenu } from 'react-horizontal-scrolling-menu';
+import { useNavigate } from "react-router-dom";
 import { AccountCard } from './AccountCard';
 
 export const AccountListView = () => {
@@ -14,7 +13,7 @@ export const AccountListView = () => {
   
   const [accounts, setAccounts] = useState(AccountData);
   const [loading, setLoading] = useState(false);
-  const [isNewBankAvailable, setIsNewBankAvailable] = useState(false);
+  const [isNewBankAvailable, setIsNewBankAvailable] = useState(true);
 
   useEffect(() => {
     // get user access token to session storage
@@ -44,25 +43,20 @@ export const AccountListView = () => {
   }
 
   return(
-    <div className = "container-md home-container p-0">
-      <div className="row">
-        <ScrollMenu>
-          {accounts.map((account, id) => (<AccountCard itemId={id} key={id} account={account}/>))}
-          
-          {loading && loadAccountsSkeletons()}
-
-          {isNewBankAvailable && 
-            <div className="col ps-2">
-              <div className="account-list-button" style={{width: "228px"}}>
-                <div className="p-4 add-bank-div">
-                  <i className="bi bi-plus-square plus-icon" onClick={navigateToBankPage}></i><br />
-                  <Button onClick={navigateToBankPage} className="new-bank-button">Add a new bank</Button>
-                </div>
-              </div>
-            </div> 
-          }
-        </ScrollMenu>
-      </div>
+    <div className="container-md account-details-container d-flex p-0 mb-5">
+      {accounts.map((account, id) => (<AccountCard itemId={id} key={id} account={account}/>))}
+      {loading && loadAccountsSkeletons()}
+      {isNewBankAvailable &&
+          <div className="col add-account-button-wrapper">
+            <Button
+                onClick={navigateToBankPage}
+                className="add-account-button d-flex align-items-center justify-content-center flex-column"
+            >
+              <i className="fi fi-rr-add"/>
+              <span>Add a new bank</span>
+            </Button>
+          </div>
+      }
     </div>
   )
 }
