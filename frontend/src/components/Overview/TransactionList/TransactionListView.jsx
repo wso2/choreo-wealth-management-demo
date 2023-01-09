@@ -57,7 +57,7 @@ const loadTransactionsView = (transactions) => {
     return (
       <Accordion.Item eventKey={id} key={id}>
         <Accordion.Header className="transaction-list">
-          <Image src={logoPath} alt="logo" className="transaction-view-logo me-2" roundedCircle={true} height="36px"/>
+          <Image src={logoPath} alt="logo" className="transaction-view-logo me-2" roundedCircle={true} height="24px"/>
           <div className="col">{date}</div>
           <div className="col">{transaction.TransactionReference}</div>
           <div className="col">{transaction.CreditDebitIndicator}</div>

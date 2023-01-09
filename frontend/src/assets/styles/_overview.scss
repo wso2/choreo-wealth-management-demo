@@ -77,30 +77,23 @@
 // Account Section
 .account-details-container {
   .account-card-wrapper {
-    background: linear-gradient(107.44deg, #92A3C4 13.54%, rgba(191, 202, 222, 0.7) 99.16%);
+    background: transparent;
+    border: 2px solid color.$accent;
     border-radius: 12px;
     box-shadow: 0 0 17px 0 rgba(0,0,0,0.05);
-    color: white;
-
-    &.personal {
-      background: linear-gradient(111.95deg, #2366CC 13.26%, rgba(35, 102, 204, 0.6) 77.61%);
-    }
-
-    &.joint {
-      background: linear-gradient(111.95deg, #23C2CC 13.26%, rgba(35, 194, 204, 0.6) 77.61%);;
-    }
 
     .account-balance {
-      font-weight: 900;
+      color: lighten(black, 20%);
+      font-weight: 700;
       margin: 0 0.25em;
     }
     .account-number {
-      font-weight: 700;
-      opacity: .85;
+      color: lighten(black, 40%);
+      font-weight: 500;
     }
     .account-name {
-      font-weight: 500;
-      opacity: .75;
+      color: lighten(black, 40%);
+      font-weight: 300;
     }
   }
 
@@ -126,6 +119,9 @@
     .accordion-item {
       background: transparent;
       border: none;
+      .transaction-view-logo {
+        opacity: .85;
+      }
       .accordion-header {
         border-bottom: 1px solid color.$background;
       }
