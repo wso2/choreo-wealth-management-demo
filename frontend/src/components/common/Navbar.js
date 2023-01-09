@@ -33,26 +33,6 @@ export const Navbar = ({ selectedTabName }) => {
             </li>
           </ul>
         </div>
-
-        {/* section - user profile content */}
-        <div id="section-right">
-          <ul className="navbar-nav fs-3">
-
-
-            <li className="nav-item dropdown-center mx-1">
-              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i className="bi bi-person-circle"></i>
-              </a>
-              
-              <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="#">My Profile</a></li>
-                <li><a className="dropdown-item" href="/logout">Logout</a></li>
-              </ul>
-            </li>
-
-          </ul>
-        </div>
-
       </div>
     </nav>
   );
