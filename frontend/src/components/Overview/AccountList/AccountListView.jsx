@@ -7,6 +7,10 @@ import { SkeletonAccount } from './SkeletonAccount';
 import { useNavigate } from "react-router-dom";
 import { AccountCard } from './AccountCard';
 
+import OwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+
 export const AccountListView = () => {
 
   const navigate = useNavigate();
@@ -43,17 +47,22 @@ export const AccountListView = () => {
   }
 
   return(
-    <div className="container-md account-details-container d-flex p-0 mb-4">
-      {accounts.map((account, id) => (<AccountCard itemId={id} key={id} account={account}/>))}
-      {loading && loadAccountsSkeletons()}
+    <div className="row account-details-container justify-content-between mb-4">
+      
+      <div className={"col-sm-12 " + (isNewBankAvailable ? "col-md-10" : "")}>
+        <OwlCarousel className='owl-theme' margin={10} loop nav>
+          {accounts.map((account, id) => (<AccountCard itemId={id} key={id} account={account}/>))}
+        </OwlCarousel>
+      </div>
+      
       {isNewBankAvailable &&
-          <div className="col add-account-button-wrapper">
+          <div className="add-account-button-wrapper col-sm-12 col-md-2">
             <Button
                 onClick={navigateToBankPage}
-                className="add-account-button d-flex align-items-center justify-content-center flex-column"
+                className="add-account-button align-items-center justify-content-center"
             >
               <i className="fi fi-rr-add"/>
-              <span>Add a new bank</span>
+              <p> Add a new account</p>
             </Button>
           </div>
       }

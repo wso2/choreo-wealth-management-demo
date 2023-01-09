@@ -1,5 +1,6 @@
 import React from 'react';
 import { Nav, NavDropdown, Image} from 'react-bootstrap';
+import avatar from "../../assets/images/avatar.svg";
 
 export const ProfileNav = () => {
     return (
@@ -17,8 +18,8 @@ export const ProfileNav = () => {
             <NavDropdown id="nav-dropdown"
                          title={
                 <div>
-                    <Image roundedCircle={true} src="https://i.pravatar.cc/150?u=fake@pravatar.com" height="36px"/>
-                    <span className="ml-4">John Smith</span>
+                    <Image roundedCircle={true} src={avatar} height="36px"/>
+                    <span className="ml-4">John Doe</span>
                 </div>
             }
             >
