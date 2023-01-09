@@ -2,7 +2,7 @@
 
 //Common
 .content-card {
-  box-shadow: 0 1px 10px -1px rgba(76, 77, 82, 0.25);
+  box-shadow: 0 1px 1px color.$shadow;
 
   .empty {
     flex: 1 1 0;

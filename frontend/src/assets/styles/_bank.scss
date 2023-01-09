@@ -1,7 +1,14 @@
 @use "color";
 
 .bank-card {
-  box-shadow: 0 0 2px #CBCEDB, 0 1px 2px #CBCEDB;
+  box-shadow: 0 0 2px color.$shadow, 0 1px 2px color.$shadow;
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    box-shadow: 0 2px 2px color.$accent;
+    cursor: pointer;
+    opacity: 0.8;
+  }
 
   .bank-name {
     color: color.$text;
@@ -9,8 +16,8 @@
   }
 
   .bank-location {
-    color: color.$accent;
-    font-size: 0.85em;
+    color: lighten(black, 60%);
+    font-size: 0.9em;
   }
 
   .bank-card-actions {

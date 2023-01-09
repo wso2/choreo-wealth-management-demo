@@ -77,25 +77,14 @@ export const BankCard = ({bank, setIsBankLoading, updateBankList}) => {
     const loadBankFunctions = (bank) => {
         return bank.isAdded ? 
             (
-                <div className="d-flex justify-content-between flex-row w-100">
-                    <div className="list-inline-item">
-                        <button
-                            type="button"
-                            className="btn bank-card-button button-primary"
-                            onClick={e => handleBankDelete(e, bank.id)}
-                        >
-                            <i className="fi fi-rr-edit"/> Edit Bank
-                        </button>
-                    </div>
-                    <div className="list-inline-item">
-                        <button
-                            type="button"
-                            className="btn bank-card-button button-error"
-                            onClick={e => handleBankDelete(e, bank.id)}
-                        >
-                            <i className="fi fi-rr-trash"/> Delete
-                        </button>
-                    </div>
+                <div className="list-inline-item">
+                    <button
+                        type="button"
+                        className="btn bank-card-button button-error"
+                        onClick={e => handleBankDelete(e, bank.id)}
+                    >
+                        <i className="fi fi-rr-trash"/> Remove Bank
+                    </button>
                 </div>
             ):
             (
