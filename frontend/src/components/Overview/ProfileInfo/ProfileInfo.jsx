@@ -1,22 +1,24 @@
 import React from 'react';
 import { Card, Image } from "react-bootstrap";
+import avatar from "../../../assets/images/avatar.svg";
 
 export const ProfileInfo = () => {
     return (
         <Card border="light" className="profile-card content-card p-3 mb-4 d-flex flex-row">
             <div className="profile-details d-flex align-items-center">
                 <div className="profile-image-section px-4">
-                    <Image roundedCircle={true} src="https://i.pravatar.cc/150?u=a042581f4e290267047" height="120px" />
+                    <Image roundedCircle={true} src={avatar} height="120px" />
                 </div>
                 <div className="profile-info-section">
                     <h5>
                         John Doe<span className="text-muted fs-6"> (john_doe)</span>
                     </h5>
+                    <span className="text-muted"><i className="fi fi-rr-briefcase"></i>Software Engineer</span><br/>
                     <span className="text-muted"><i className="fi fi-rr-marker"></i>Bay Area, San Francisco, CA</span>
                     <p className="mb-0">
                         <span className="text-muted">Contact:</span>
                         <span> john_doe@email.com, </span>
-                        <span>(239) 816-9029</span>
+                        <span>(+239) 816-9029</span>
                     </p>
                 </div>
             </div>
