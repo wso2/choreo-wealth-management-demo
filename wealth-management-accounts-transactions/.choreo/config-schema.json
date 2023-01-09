@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "choreotestorganization": {
+      "type": "object",
+      "properties": {
+        "wealth_management_accounts_transactions": {
+          "type": "object",
+          "properties": {
+            "transactionServiceClientId": {
+              "type": "string",
+              "description": ""
+            },
+            "transactionServiceClientSecret": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "transactionServiceClientId",
+            "transactionServiceClientSecret"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
