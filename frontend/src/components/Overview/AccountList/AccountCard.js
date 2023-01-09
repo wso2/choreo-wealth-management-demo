@@ -4,7 +4,7 @@ import { loadBankLogoByNickName } from "../../../services/utils";
 export const AccountCard = ({account}) => {
 
     return (
-        <Card className="account-card-wrapper col me-3 px-4 py-5">
+        <Card className="account-card-wrapper col me-1 px-4 py-3">
             <div className="d-flex align-items-center flex-row mb-1">
                 <Image roundedCircle={true} src={loadBankLogoByNickName(account.Nickname)} alt="bank-logo" height="30px"/>
                 <h3 className="account-balance">{account.Balance}</h3>

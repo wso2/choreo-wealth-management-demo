@@ -41,17 +41,16 @@ export const Banks = () => {
     }
 
     return (
-        <>
-                <div className="container-md mt-5" >
-                    <BankList title="Link my other bank" banks={newBanks} 
-                        setIsBankLoading={setIsBankAdding} updateBankList={updateBankList} />
-                </div>
-                <br />
-                <div className="container-md mt-4 mb-5">
-                    <BankList title="Added banks" banks={addedBanks} isBankLoading={isBankAdding} 
-                        updateBankList={updateBankList} />
-                </div>
-                <br />
-        </>
+        <div>
+            <div className="d-flex mb-3">
+                <h4>All Banks</h4>
+            </div>
+            <div>
+                <BankList title="Link my other bank" banks={newBanks}
+                    setIsBankLoading={setIsBankAdding} updateBankList={updateBankList} />
+                <BankList title="Added banks" banks={addedBanks} isBankLoading={isBankAdding}
+                          updateBankList={updateBankList} />
+            </div>
+        </div>
     )
 }

@@ -2,7 +2,7 @@
 
 //Common
 .content-card {
-  box-shadow: 0 1px 10px -1px rgba(76, 77, 82, 0.25);
+  box-shadow: 0 1px 1px color.$shadow;
 
   .empty {
     flex: 1 1 0;
@@ -82,6 +82,9 @@
     border-radius: 12px;
     box-shadow: 0 0 17px 0 rgba(0,0,0,0.05);
 
+    img {
+      width: inherit !important;
+    }
     .account-balance {
       color: lighten(black, 20%);
       font-weight: 700;
@@ -98,9 +101,7 @@
   }
 
   .add-account-button-wrapper {
-    max-width: 200px;
-    padding-left: 1em;
-    width: 200px;
+    min-width: 200px;
 
     .add-account-button {
       background-color: transparent;

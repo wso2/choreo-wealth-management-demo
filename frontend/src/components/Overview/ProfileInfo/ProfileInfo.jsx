@@ -15,7 +15,7 @@ export const ProfileInfo = () => {
                     </h5>
                     <span className="text-muted"><i className="fi fi-rr-briefcase"></i>Software Engineer</span><br/>
                     <span className="text-muted"><i className="fi fi-rr-marker"></i>Bay Area, San Francisco, CA</span>
-                    <p className="mb-0">
+                    <p className="mt-2 mb-0">
                         <span className="text-muted">Contact:</span>
                         <span> john_doe@email.com, </span>
                         <span>(+239) 816-9029</span>
