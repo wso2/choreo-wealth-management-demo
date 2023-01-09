@@ -43,15 +43,3 @@ export const loadBankLogoByNickName = (bankNickName) => {
     return "/bank_logos/ContosoInvestment.svg";
   }
 }
-
-export const getBankCardStyle = (bankNickName) => {
-  if (bankNickName.includes("Contoso Retail")) {
-    return "contoso-retail-bank";
-  } else if (bankNickName.includes("Contoso SME")) {
-    return "contoso-sme-bank";
-  } else if (bankNickName.includes("Contoso Corporate")) {
-    return "contoso-corp-bank";
-  }  else {
-    return "contoso-investment";
-  }
-}

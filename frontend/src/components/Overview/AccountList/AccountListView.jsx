@@ -43,7 +43,7 @@ export const AccountListView = () => {
   }
 
   return(
-    <div className="container-md account-details-container d-flex p-0 mb-5">
+    <div className="container-md account-details-container d-flex p-0 mb-4">
       {accounts.map((account, id) => (<AccountCard itemId={id} key={id} account={account}/>))}
       {loading && loadAccountsSkeletons()}
       {isNewBankAvailable &&

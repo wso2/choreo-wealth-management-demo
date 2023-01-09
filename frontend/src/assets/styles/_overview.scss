@@ -77,34 +77,23 @@
 // Account Section
 .account-details-container {
   .account-card-wrapper {
+    background: transparent;
+    border: 2px solid color.$accent;
     border-radius: 12px;
     box-shadow: 0 0 17px 0 rgba(0,0,0,0.05);
-    color: white;
-
-    &.contoso-retail-bank {
-      background: lighten(color.$con-retailer, 20%);
-    }
-    &.contoso-sme-bank {
-      background: lighten(color.$con-sme, 20%);
-    }
-    &.contoso-corp-bank {
-      background: lighten(color.$con-cop, 20%);
-    }
-    &.contoso-investment {
-      background: lighten(color.$con-inv, 30%);
-    }
 
     .account-balance {
-      font-weight: 900;
+      color: lighten(black, 20%);
+      font-weight: 700;
       margin: 0 0.25em;
     }
     .account-number {
-      font-weight: 700;
-      opacity: .85;
+      color: lighten(black, 40%);
+      font-weight: 500;
     }
     .account-name {
-      font-weight: 500;
-      opacity: .75;
+      color: lighten(black, 40%);
+      font-weight: 300;
     }
   }
 
@@ -130,6 +119,9 @@
     .accordion-item {
       background: transparent;
       border: none;
+      .transaction-view-logo {
+        opacity: .85;
+      }
       .accordion-header {
         border-bottom: 1px solid color.$background;
       }
