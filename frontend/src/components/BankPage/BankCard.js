@@ -3,6 +3,7 @@ import { getAuthorizationURL } from "../../services/oauth2-service"
 import { getAppAccessToken } from "../../services/token-service";
 import { CONSTANTS } from "../../services/utils";
 import { useState, useCallback } from "react";
+import { Card, Image } from 'react-bootstrap';
 
 export const BankCard = ({bank, setIsBankLoading, updateBankList}) => {
 
@@ -76,36 +77,50 @@ export const BankCard = ({bank, setIsBankLoading, updateBankList}) => {
     const loadBankFunctions = (bank) => {
         return bank.isAdded ? 
             (
-                <>
-                    <li className="list-inline-item">
-                        <a href="#" className="social-link"><i className="bi bi-pencil"></i></a>
-                    </li>
-                    <li className="list-inline-item">
-                        <button type="button" className="social-link" onClick={e => handleBankDelete(e, bank.id)}>
-                        <i className="bi bi-trash3"></i>
-                    </button>
-                    </li>
-                </>
+                <div className="d-flex justify-content-between flex-row w-100">
+                    <div className="list-inline-item">
+                        <button
+                            type="button"
+                            className="btn bank-card-button button-primary"
+                            onClick={e => handleBankDelete(e, bank.id)}
+                        >
+                            <i className="fi fi-rr-edit"/> Edit Bank
+                        </button>
+                    </div>
+                    <div className="list-inline-item">
+                        <button
+                            type="button"
+                            className="btn bank-card-button button-error"
+                            onClick={e => handleBankDelete(e, bank.id)}
+                        >
+                            <i className="fi fi-rr-trash"/> Delete
+                        </button>
+                    </div>
+                </div>
             ):
             (
-                <li className="list-inline-item">
-                    <button type="button" className="social-link" onClick={e => handleBankAdd(e, bank.id)}>
-                        <i className="bi bi-plus-lg"></i>
+                <div className="list-inline-item">
+                    <button
+                        type="button"
+                        className="btn bank-card-button button-primary"
+                        onClick={e => handleBankAdd(e, bank.id)}
+                    >
+                        <i className="fi fi-rr-add"/>Add Bank
                     </button>
-                </li>
+                </div>
             );
     };
 
     return (
-        <div className="col mb-5" id="bank-card">
-            <div className="bg-enabled rounded shadow-sm py-3 px-3" >
-                <img src={bank.logo} alt="" width="80" className="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm" />
-                <h5 className="mb-0">{bank.name}</h5>
-                <span className="small text-uppercase text-muted">{bank.country}</span>
-                <ul className="social mb-0 list-inline mt-3">
-                    {loadBankFunctions(bank)}
-                </ul>
+        <Card className="col p-4 mb-3 me-3 bank-card" id="bank-card" border="light">
+            <Image src={bank.logo} width="40px" roundedCircle={true} />
+            <div className="d-flex align-items-baseline flex-column my-3">
+                <h5 className="bank-name mb-0">{bank.name}</h5>
+                <span className="bank-location text-uppercase">{bank.country}</span>
             </div>
-        </div>
+            <div className="d-flex bank-card-actions">
+                {loadBankFunctions(bank)}
+            </div>
+        </Card>
     );
 };

@@ -20,7 +20,7 @@ export const SidePanel = ({selectedTabName}) => {
                     <Nav.Item>
                         <Nav.Link href="/banks" className={isActiveTab("Banks", selectedTabName)}>
                             <i className="fi fi-rr-bank"></i>
-                            <span>Bank</span>
+                            <span>Banks</span>
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
