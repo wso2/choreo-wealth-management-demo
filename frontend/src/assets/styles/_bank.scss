@@ -1,0 +1,43 @@
+@use "color";
+
+.bank-card {
+  box-shadow: 0 0 2px #CBCEDB, 0 1px 2px #CBCEDB;
+
+  .bank-name {
+    color: color.$text;
+    font-size: 1.1em;
+  }
+
+  .bank-location {
+    color: color.$accent;
+    font-size: 0.85em;
+  }
+
+  .bank-card-actions {
+    border-top: 1px solid color.$background;
+    padding-top: 1em;
+  }
+
+  .bank-card-button {
+    align-items: center;
+    display: flex;
+    padding: 0;
+
+    &.button-primary {
+      color: color.$primary;
+    }
+
+    &.button-error {
+      color: color.$error;
+    }
+
+    i {
+      line-height: 1;
+      margin-right: 4px;
+    }
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
