@@ -24,20 +24,6 @@
     ],
     "newBanks": [
         {
-            "id": "10",
-            "name": "Goldcorp Bank",
-            "logo": "bank_logos/GoldcorpBank.svg",
-            "country": "England",
-            "isAdded": false
-        },
-        {
-            "id": "11",
-            "name": "Citizens First Bank",
-            "logo": "bank_logos/CitizensFirstBank.svg",
-            "country": "Scotland",
-            "isAdded": false
-        },
-        {
             "id": "12",
             "name": "Contoso Investment Bank",
             "logo": "bank_logos/ContosoInvestment.svg",
