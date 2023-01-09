@@ -1,4 +1,3 @@
-import { Navbar } from "../common/Navbar";
 import { Footer } from "../common/Footer"
 import { BankList } from "./BankList";
 import { useState } from "react";
@@ -45,7 +44,6 @@ export const Banks = () => {
 
     return (
         <>
-            <Navbar selectedTabName="Banks" />
             <ErrorBoundary>
                 <div className="container-md mt-5" >
                     <BankList title="Link my other bank" banks={newBanks} 
