@@ -1,9 +1,7 @@
-import { Footer } from "../common/Footer"
 import { BankList } from "./BankList";
 import { useState } from "react";
 import { CONSTANTS } from "../../services/utils";
 import BankData from "../../data/BankData.json";
-import { ErrorBoundary } from "../common/ErrorBoundary";
 
 export const Banks = () => {
     
@@ -44,7 +42,6 @@ export const Banks = () => {
 
     return (
         <>
-            <ErrorBoundary>
                 <div className="container-md mt-5" >
                     <BankList title="Link my other bank" banks={newBanks} 
                         setIsBankLoading={setIsBankAdding} updateBankList={updateBankList} />
@@ -55,8 +52,6 @@ export const Banks = () => {
                         updateBankList={updateBankList} />
                 </div>
                 <br />
-            </ErrorBoundary>
-            <Footer />
         </>
     )
 }
