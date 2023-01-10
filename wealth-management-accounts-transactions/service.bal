@@ -33,7 +33,7 @@ type InvestmentAccount record {
 service / on new http:Listener(9090) {
 
     # A service to return transaction resource.
-    # + accountId - accountID of the customer
+    # + accountId - accountID of the customer.
     # + return - Transaction resource.
     resource function get transactions(string accountId) returns wealthmanagementtransactions:Transaction[]|error {
 
@@ -43,8 +43,9 @@ service / on new http:Listener(9090) {
             auth: {
                 clientId: transactionServiceClientId,
                 clientSecret: transactionServiceClientSecret
+
             }
-        });
+        }, serviceUrl="https://c112eada-316e-46a7-9705-df75e4a30edc-dev.e1-us-east-azure.choreoapis.dev/ywsm/wealthmanagementtransactions/1.0.0");
         wealthmanagementtransactions:Transaction[] getTransactionsResponse = check transactionsService->getTransactions(accountId);
         return getTransactionsResponse;
     }
