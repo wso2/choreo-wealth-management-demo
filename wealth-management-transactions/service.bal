@@ -1,4 +1,6 @@
 import ballerina/http;
+import ballerina/log;
+
 
 table<Transaction> key(TransactionId) AccountTransactions = table [
     {AccountId: "30080012343456", TransactionId: "12323", TransactionReference: "Food", CreditDebitIndicator: "Debit", BookingDateTime: "2022-04-05T10:43:07+00:00", ValueDateTime: "2022-09-05T10:45:22+00:00", TransactionInformation: "Restaurant Bill", Amount: "1230.00", Currency: "USD"},
@@ -22,6 +24,8 @@ service / on new http:Listener(9090) {
     #
     # + return - transaction information.
     resource function get transactions(string accountId) returns Transaction[]|error {
+
+        log:printInfo("retriveing transactions", accountId = accountId);
 
         Transaction[] transactions = from var e in AccountTransactions
             where e.AccountId == accountId
