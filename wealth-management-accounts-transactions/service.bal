@@ -54,7 +54,7 @@ service / on new http:Listener(9090) {
     # + return - InvestmentAccount resource.
     resource function get investmentaccounts(string customerId) returns InvestmentAccount[]|error {
 
-        log:printInfo("retriveing investment account details of customer", customerId = customerId);
+        log:printInfo("Retriveing investment account details of customer", customerId = customerId);
 
         InvestmentAccount[] accountInfo = from var e in investmentAccount
             where e.CustomerID == customerId
