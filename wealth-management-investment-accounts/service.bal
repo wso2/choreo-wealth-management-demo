@@ -31,7 +31,7 @@ service / on new http:Listener(9090) {
     # A resource for returning account details
     # + customerId - unique identifier for customer
     # + return - InvestmentAccount
-    resource function get greeting(string customerId="001") returns InvestmentAccount[]|error {
+    resource function get accounts(string customerId="001") returns InvestmentAccount[]|error {
         // Send a response back to the caller.
        InvestmentAccount[] accountInfo = from var e in investmentAccount
             where e.CustomerID == customerId
