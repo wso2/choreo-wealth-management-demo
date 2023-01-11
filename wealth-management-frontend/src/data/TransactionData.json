@@ -1,0 +1,122 @@
+[
+    {
+        "AccountId": "30080012343456",
+        "TransactionId": "32445",
+        "TransactionReference": "Shopping",
+        "Amount": {
+            "Amount": "10.00",
+            "Currency": "USD"
+        },
+        "CreditDebitIndicator": "Debit",
+        "Status": "Booked",
+        "BookingDateTime": "2022-10-05T10:43:07+00:00",
+        "ValueDateTime": "2022-10-05T10:43:07+00:00",
+        "TransactionInformation": "Paid Netflix Subscription",
+        "BankTransactionCode": {
+            "Code": "str",
+            "SubCode": "str"
+        },
+        "ProprietaryBankTransactionCode": {
+            "Code": "Contoso Retail",
+            "Issuer": "AbsoluteBank"
+        },
+        "Balance": {
+            "Amount": {
+                "Amount": "230.00",
+                "Currency": "USD"
+            },
+            "CreditDebitIndicator": "Debit",
+            "Type": "InterimBooked"
+        }
+    },
+    {
+        "AccountId": "30080098763459",
+        "TransactionId": "20119",
+        "TransactionReference": "Education",
+        "Amount": {
+            "Amount": "100.00",
+            "Currency": "USD"
+        },
+        "CreditDebitIndicator": "Credit",
+        "Status": "Booked",
+        "BookingDateTime": "2022-09-05T10:43:07+00:00",
+        "ValueDateTime": "2022-09-05T10:43:07+00:00",
+        "TransactionInformation": "Scholarship from the institute",
+        "BankTransactionCode": {
+            "Code": "str",
+            "SubCode": "str"
+        },
+        "ProprietaryBankTransactionCode": {
+            "Code": "Contoso SME",
+            "Issuer": "FreeCitizenBank"
+        },
+        "Balance": {
+            "Amount": {
+                "Amount": "230.00",
+                "Currency": "USD"
+            },
+            "CreditDebitIndicator": "Credit",
+            "Type": "InterimBooked"
+        }
+    },
+    {
+        "AccountId": "30080098971337",
+        "TransactionId": "10755",
+        "TransactionReference": "Transportation",
+        "Amount": {
+            "Amount": "46.00",
+            "Currency": "USD"
+        },
+        "CreditDebitIndicator": "Debit",
+        "Status": "Booked",
+        "BookingDateTime": "2022-07-05T10:43:07+00:00",
+        "ValueDateTime": "2022-07-05T10:43:07+00:00",
+        "TransactionInformation": "Medical expence",
+        "BankTransactionCode": {
+            "Code": "str",
+            "SubCode": "str"
+        },
+        "ProprietaryBankTransactionCode": {
+            "Code": "Contoso Retail",
+            "Issuer": "AbsoluteBank"
+        },
+        "Balance": {
+            "Amount": {
+                "Amount": "230.00",
+                "Currency": "USD"
+            },
+            "CreditDebitIndicator": "Debit",
+            "Type": "InterimBooked"
+        }
+    },
+    {
+        "AccountId": "650-000 N1232",
+        "TransactionId": "26112",
+        "TransactionReference": "Mortgage",
+        "Amount": {
+            "Amount": "83.00",
+            "Currency": "USD"
+        },
+        "CreditDebitIndicator": "Debit",
+        "Status": "Booked",
+        "BookingDateTime": "2022-06-05T10:43:07+00:00",
+        "ValueDateTime": "2022-06-05T10:43:07+00:00",
+        "TransactionInformation": "Paid Monthly Mortgage",
+        "BankTransactionCode": {
+            "Code": "str",
+            "SubCode": "str"
+        },
+        "ProprietaryBankTransactionCode": {
+            "Code": "Contoso Corporate",
+            "Issuer": "NewCivilBank"
+        },
+        "Balance": {
+            "Amount": {
+                "Amount": "230.00",
+                "Currency": "USD"
+            },
+            "CreditDebitIndicator": "Debit",
+            "Type": "InterimBooked"
+        }
+    }
+]

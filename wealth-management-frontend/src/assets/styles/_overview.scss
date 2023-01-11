@@ -1,0 +1,169 @@
+@use "color";
+
+//Common
+.content-card {
+  box-shadow: 0 1px 1px color.$shadow;
+
+  .empty {
+    flex: 1 1 0;
+  }
+}
+
+.section-title {
+  color: color.$text;
+  font-weight: 700;
+}
+
+//Profile Section
+.profile-card {
+  .profile-details {
+    .profile-image-section {
+      img {
+        border: 2px solid white;
+        box-shadow: 0 0 17px 0 rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .profile-info-section {
+      .text-muted {
+        i {
+          margin-right: 4px;
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+
+  .wealth-details {
+    gap: 4.5em;
+    padding-right: 1.5em;
+
+    .wealth-card {
+      &.wealth-plus {
+        i {
+          background: lighten(color.$primary, 40%);
+          color: color.$primary;
+        }
+      }
+
+      &.wealth-minus {
+        i {
+          background: lighten(color.$secondary, 70%);
+          color: color.$secondary;
+        }
+      }
+    }
+
+    .wealth-icon-container {
+      i {
+        border-radius: 50%;
+        font-size: 1.5em;
+        height: 2em;
+        margin-bottom: 0.75em;
+        padding: 0.75em;
+        width: 2em;
+      }
+      .wealth-value {
+        color: lighten(black, 30%);
+        font-weight: 900;
+      }
+      .wealth-label {
+        font-weight: 300;
+      }
+    }
+  }
+}
+
+// Account Section
+.account-details-container {
+  .account-card-wrapper {
+    background: transparent;
+    border: 2px solid color.$accent;
+    border-radius: 12px;
+    box-shadow: 0 0 17px 0 rgba(0,0,0,0.05);
+
+    img {
+      width: inherit !important;
+    }
+    .account-balance {
+      color: lighten(black, 20%);
+      font-weight: 700;
+      margin: 0 0.25em;
+    }
+    .account-number {
+      color: lighten(black, 40%);
+      font-weight: 500;
+    }
+    .account-name {
+      color: lighten(black, 40%);
+      font-weight: 300;
+    }
+  }
+
+  .add-account-button-wrapper {
+    min-width: 200px;
+
+    .add-account-button {
+      background-color: transparent;
+      border: 1px dashed color.$primary;
+      color: color.$primary;
+      font-size: 1.2em;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+//Transaction section
+.transaction-list-container {
+  .transaction-list-card {
+    .accordion-item {
+      background: transparent;
+      border: none;
+      .transaction-view-logo {
+        opacity: .85;
+      }
+      .accordion-header {
+        border-bottom: 1px solid color.$background;
+      }
+      .accordion-button {
+        border-radius: 0;
+        padding: 0.5em;
+        &:focus,
+        &:not(.collapsed) {
+          background-color: transparent;
+          box-shadow: none;
+
+        }
+        &:not(.collapsed) {
+          color: color.$primary;
+          font-weight: 600;
+        }
+      }
+      .accordion-collapse {
+        &.show {
+          border-bottom: 1px solid lighten(black, 90%);
+        }
+      }
+    }
+  }
+}
+
+//Expense Section
+
+.expenses-chart-container {
+  .chart-data-wrapper {
+    .chart-data-title {
+      border-bottom: 1px solid color.$background;
+      color: lighten(black, 60%);
+      font-size: 0.95em;
+    }
+
+    .chart-data-value {
+      color: lighten(black, 10%);
+      font-size: 1.25em;
+      font-weight: 700;
+      padding-top: 0.5em;
+    }
+  }
+}

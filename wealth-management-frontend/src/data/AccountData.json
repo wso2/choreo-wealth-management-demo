@@ -1,0 +1,41 @@
+[
+    {
+        "AccountId": "30080012343456",
+        "DisplayName": "Joint Account - New Civil Bank",
+        "AccountName": "account_1",
+        "AuthorizationMethod": "single",
+        "Nickname": "Joint Account - Contoso Retail Bank",
+        "CustomerAccountType": "Individual",
+        "Type": "TRANS_AND_SAVINGS_ACCOUNTS",
+        "IsEligible": true,
+        "IsJointAccount": false,
+        "JointAccountConsentElectionStatus": false,
+        "Balance": "$1234.78"
+    },
+    {
+        "AccountId": "30080098763459",
+        "DisplayName": "Savings Account - Absolute Bank",
+        "AccountName": "account_2",
+        "AuthorizationMethod": "single",
+        "Nickname": "Savings Account - Contoso Corporate",
+        "CustomerAccountType": "Individual",
+        "Type": "TRANS_AND_SAVINGS_ACCOUNTS",
+        "IsEligible": true,
+        "IsJointAccount": false,
+        "JointAccountConsentElectionStatus": false,
+        "Balance": "$9158.01"
+    },
+    {
+        "AccountId": "9134-9897-133",
+        "DisplayName": "Joint Account - Free Citizen Bank",
+        "AccountName": "multi_auth_account",
+        "AuthorizationMethod": "multiple",
+        "Nickname": "Joint Account - Contoso SME Bank",
+        "CustomerAccountType": "Individual",
+        "Type": "TRANS_AND_SAVINGS_ACCOUNTS",
+        "IsEligible": true,
+        "IsJointAccount": false,
+        "JointAccountConsentElectionStatus": false,
+        "Balance": "$7189.37"
+    }
+]

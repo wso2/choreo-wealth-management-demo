@@ -1,0 +1,32 @@
+{
+    "banks": [
+        {
+            "id": "1",
+            "name": "Contoso Retail Bank",
+            "logo": "bank_logos/ContosoRetailBank.svg",
+            "country": "Wales",
+            "isAdded": false
+        },
+        {
+            "id": "2",
+            "name": "Contoso SME Bank",
+            "logo": "bank_logos/ContosoSMEBank.svg",
+            "country": "Scotland",
+            "isAdded": false
+        },
+        {
+            "id": "3",
+            "name": "Contoso Corporate Bank",
+            "logo": "bank_logos/ContosoCorpBank.svg",
+            "country": "England",
+            "isAdded": false
+        },
+        {
+            "id": "4",
+            "name": "Contoso Investment Bank",
+            "logo": "bank_logos/ContosoInvestment.svg",
+            "country": "Wales",
+            "isAdded": false
+        }
+    ]
+}
