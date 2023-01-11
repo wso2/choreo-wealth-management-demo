@@ -41,7 +41,7 @@ service / on new http:Listener(9090) {
     # A service to return transaction resource.
     # + accountId - accountID of the customer.
     # + return - Transaction resource.
-    resource function get transactions(string accountId) returns wealthmanagementtransactions:Transaction[]|error {
+    resource function get transactions(string accountId = "30080012343456") returns wealthmanagementtransactions:Transaction[]|error {
 
         log:printInfo("retriveing transactions", accountId = accountId);
 
@@ -59,7 +59,7 @@ service / on new http:Listener(9090) {
     # A service to return investment  accounts details.
     # + customerId - unique identifier for customer
     # + return - InvestmentAccount resource.
-    resource function get investmentaccounts(string customerId) returns InvestmentAccount[]|error {
+    resource function get investmentaccounts(string customerId = "001") returns InvestmentAccount[]|error {
 
         log:printInfo("Retriveing investment account details of customer", customerId = customerId);
 
