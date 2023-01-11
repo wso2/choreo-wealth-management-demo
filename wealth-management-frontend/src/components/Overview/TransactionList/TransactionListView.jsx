@@ -1,5 +1,6 @@
 import React from 'react'
 import { Accordion, Table, Image, Card } from "react-bootstrap";
+import { loadBankLogo } from '../../../services/utils';
 
 export const TransactionListView = ({transactions}) => {
 
@@ -26,7 +27,7 @@ const loadTransactionsView = (transactions) => {
     return (
       <Accordion.Item eventKey={id} key={id}>
         <Accordion.Header className="transaction-list">
-          <Image src={transaction.Logo} alt="logo" className="transaction-view-logo me-2" roundedCircle={true} height="24px"/>
+          <Image src={loadBankLogo(transaction.BankName)} alt="logo" className="transaction-view-logo me-2" roundedCircle={true} height="24px"/>
           <div className="col">{date}</div>
           <div className="col">{transaction.TransactionReference}</div>
           <div className="col">{transaction.CreditDebitIndicator}</div>
@@ -42,6 +43,10 @@ const loadTransactionsView = (transactions) => {
             <tr>
               <td>Account Id</td>
               <td>{transaction.AccountId}</td>
+            </tr>
+            <tr>
+              <td>Bank Name</td>
+              <td>{transaction.BankName}</td>
             </tr>
             <tr>
               <td>Transaction Information</td>

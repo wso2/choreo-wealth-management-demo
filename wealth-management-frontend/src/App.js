@@ -5,14 +5,8 @@ import { Login } from './components/Login/Login';
 import { Logout } from "./components/Logout/Logout";
 import { Dashboard } from "./layouts/Dashboard";
 import { BanksLayout } from "./layouts/Banks";
-import { Toast } from 'bootstrap';
 
 function App() {
- 
-  const toastElList = document.querySelectorAll('.toast')
-  const toastList = [...toastElList].map(toastEl => Toast(toastEl));
-  toastList.forEach(toast => toast.show());
- 
   return (
     <div>
         <Routes>

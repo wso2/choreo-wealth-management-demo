@@ -77,10 +77,24 @@
 // Account Section
 .account-details-container {
   .account-card-wrapper {
-    background: transparent;
-    border: 2px solid color.$accent;
     border-radius: 12px;
     box-shadow: 0 0 17px 0 rgba(0,0,0,0.05);
+
+    &.Retail {
+      border: 1px solid color.$con-retailer;
+    }
+
+    &.SME {
+      border: 1px solid color.$con-sme;
+    }
+
+    &.Corporate {
+      border: 1px solid color.$con-cop;
+    }
+
+    &.Investment {
+      border: 1px solid color.$con-inv;
+    }
 
     img {
       width: inherit !important;

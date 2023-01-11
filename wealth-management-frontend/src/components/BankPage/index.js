@@ -3,12 +3,17 @@ import { CONSTANTS, getTokenFromCookieOrRetrieve } from "../../services/utils";
 import BankData from "../../data/BankData.json";
 import { getAddedBanks } from "../../services/banks-service";
 import { BankCard } from "./BankCard";
+import { Toast } from "bootstrap"
 
 export const Banks = () => {
     
     const [banks, setBanks] = useState([]);
     const [toastMsg, setToastMsg] = useState("");
     const [isBankAdded, setIsBankAdded] = useState("");
+
+    const toastElList = document.querySelectorAll('.toast')
+    const toastList = [...toastElList].map(toastEl => new Toast(toastEl));
+    toastList.map(toast => toast.show());
 
     useEffect(() => {
         fetchBanksAPI().then(result => {
