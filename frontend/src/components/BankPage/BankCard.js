@@ -1,72 +1,26 @@
-import { generateAccountAccessConsent } from "../../services/account-consent-service"
-import { getAuthorizationURL } from "../../services/oauth2-service"
-import { getAppAccessToken } from "../../services/token-service";
-import { CONSTANTS } from "../../services/utils";
-import { useState, useCallback } from "react";
+import { getTokenFromCookieOrRetrieve } from "../../services/utils";
 import { Card, Image } from 'react-bootstrap';
+import { addBank } from "../../services/banks-service";
 
-export const BankCard = ({bank, setIsBankLoading, updateBankList}) => {
+export const BankCard = ({bank, updateBank, setToastMsg}) => {
 
-    // To catch async errors using ErrorBoundary
-    const useAsyncError = () => {
-        const [ , setError] = useState(null);
-        return useCallback(e => {setError(() => {throw e})}, [setError]);
-    };
-    const throwError = useAsyncError();
-
-    const handleBankAdd = async (event, bankId) => {
-        
+    const handleBankAdd = (event, bankId) => {
         event.preventDefault();
-        if (setIsBankLoading) setIsBankLoading(true);
-        
-        // generate application access token
-        let app_access_token = sessionStorage.getItem(CONSTANTS.app_access_token);
-        try {
-            if (!app_access_token) {
-
-                const tokenResponse = await getAppAccessToken();
-                app_access_token = tokenResponse.data.access_token;
-
-                // add application access token to session storage
-                sessionStorage.setItem(CONSTANTS.app_access_token, app_access_token);
-                console.log("generated application access token");
-            } else {
-                console.log("found an application access token");
-            }
-        } catch (error) {
-            console.log("error: " + error.message);
-            if (setIsBankLoading) setIsBankLoading(false);
-            throwError(new Error("failed to generate app access token"));
-        }
-
-        // generate consent id
-        let consent_id;
-        try {
-            const consentResponse = await generateAccountAccessConsent(app_access_token);
-            consent_id = consentResponse.data.Data.ConsentId;;
-            console.log("generated new consent id: " + consent_id)
-        } catch (error) {
-            console.log("error: " + error.message);
-            if (setIsBankLoading) setIsBankLoading(false);
-            throwError(new Error("failed to generate consent ID"));
-        }
-
-        // generate authorization url
-        try {
-            const authorizeResponse = await getAuthorizationURL(consent_id, app_access_token)
-            updateBankList(bankId);
-            console.log("redirecting to ", authorizeResponse.data);
-            window.location.replace(authorizeResponse.data);
-        } catch (error) {
-            console.log("error: " + error.message);
-            if (setIsBankLoading) setIsBankLoading(false);
-            throwError(new Error("failed to generate authorization url"));
-        }
+        getTokenFromCookieOrRetrieve().then(access_token => {
+            addBank(access_token, bankId).then(resp => {
+                updateBank(bankId, true);
+                setToastMsg("Successfully added the bank!");
+            }).catch(err => {
+                console.log("failed to add bank. Caused by, ", err);
+                setToastMsg("Try Again! Failed to add the bank!")
+            });
+        })
     }
 
     const handleBankDelete = (event, bankId) => {
         event.preventDefault();
-        updateBankList(bankId);
+        updateBank(bankId, false);
+        setToastMsg("Successfully deleted the bank!")
     }
 
     /*

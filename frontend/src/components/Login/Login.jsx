@@ -5,16 +5,15 @@ import { LoginAsgardeo } from './LoginAsgardeo';
 const config = {
      signInRedirectURL: CONFIG.SIGN_IN_REDIRECT_URL,
      signOutRedirectURL: CONFIG.SIGN_OUT_REDIRECT_URL,
-     clientID: CONFIG.CLIENTID,
-     baseUrl: CONFIG.BASE_URL,
+     clientID: CONFIG.ASGARDEO_APP_CONSUMER_KEY,
+     baseUrl: CONFIG.ASGARDEO_BASE_URL,
      scope: [ CONFIG.SCOPE ]
 };
 
 export function  Login() {
-     let Component = LoginAsgardeo
      return (
           <AuthProvider config={config}>
-               <Component />
+               <LoginAsgardeo />
           </AuthProvider>
      );
 };

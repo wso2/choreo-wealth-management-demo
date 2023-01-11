@@ -2,8 +2,8 @@ import { Container, Row, Col }from 'react-bootstrap';
 import asgardeoLogo from "../../assets/images/asgardeo.svg";
 import illustration from "../../assets/images/illustration.svg";
 import { useAuthContext } from "@asgardeo/auth-react";
-import facebookLogo from "../../assets/images/facebook.svg";
-import googleLogo from "../../assets/images/google.svg";
+import linkedinLogo from "../../assets/images/linkedin.svg";
+import githubLogo from "../../assets/images/github.svg";
 
 export function LoginAsgardeo() {
     const {state, signIn, signOut} = useAuthContext();
@@ -40,12 +40,12 @@ return (
 						</div>
 						<div className="form-group login-social__container">
 							<button type="button" className="form-image-button btn btn-primary">
-								<img src={facebookLogo} alt="facebook icon"/>
-								<span>Facebook</span>
+								<img src={linkedinLogo} alt="facebook icon"/>
+								<span>LinkedIn</span>
 							</button>
 							<button type="button" className="form-image-button btn btn-primary">
-								<img src={googleLogo} alt="google icon"/>
-								<span>Google</span>
+								<img src={githubLogo} alt="google icon"/>
+								<span>Github</span>
 							</button>
 							<button type="button" className="form-image-button btn btn-primary" onClick={() => signIn()}>
 								<img src={asgardeoLogo} alt="asgardeo logo"/>
