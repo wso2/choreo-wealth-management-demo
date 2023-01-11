@@ -8,19 +8,19 @@
         "wealth_management_accounts_transactions": {
           "type": "object",
           "properties": {
-            "transactionServiceClientId": {
+            "clientId": {
               "type": "string",
               "description": ""
             },
-            "transactionServiceClientSecret": {
+            "clientSecret": {
               "type": "string",
               "description": ""
             }
           },
           "additionalProperties": false,
           "required": [
-            "transactionServiceClientId",
-            "transactionServiceClientSecret"
+            "clientId",
+            "clientSecret"
           ]
         }
       },
