@@ -38,7 +38,7 @@ type AccountDetails record {|
 # bound to port `9090`.
 service / on new http:Listener(9090) {
 
-    # A service to return transaction resource.
+    # Returns a list of transactions for a particular account.
     # + accountId - accountID of the customer.
     # + return - Transaction resource.
     resource function get transactions(string accountId) returns wealthmanagementtransactions:Transaction[]|error {
@@ -56,7 +56,7 @@ service / on new http:Listener(9090) {
         return getTransactionsResponse;
     }
 
-    # A service to return investment  accounts details.
+    # return a list of investment accounts for a particular customer.
     # + customerId - unique identifier for customer
     # + return - InvestmentAccount resource.
     resource function get investmentaccounts(string customerId) returns InvestmentAccount[]|error {
@@ -71,7 +71,7 @@ service / on new http:Listener(9090) {
 
     }
 
-    # A service to return accounts and transaction information for a particular bank.
+    # returns a list of accounts and transactions for a particular customer.
     # + customerId - unique customer identifier.
     # + bank - bank type.
     # + return - Transaction and Accounts resource.
@@ -108,6 +108,10 @@ service / on new http:Listener(9090) {
     }
 }
 
+# combine a AccountInformation record and Transactions record to AccountDetails record to AccountDetails record.
+# + accountInformation - AccountInformation record.
+# + transactions - Transactions records.
+# + return - AccountDetails record.
 function transform(wealthmanagementaccounts:AccountInformation accountInformation, wealthmanagementtransactions:Transaction[] transactions) returns AccountDetails => {
     Bank: accountInformation.Bank,
     Transactions: transactions,
