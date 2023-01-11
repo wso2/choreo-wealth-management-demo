@@ -38,9 +38,9 @@ type AccountDetails record {|
 # bound to port `9090`.
 service / on new http:Listener(9090) {
 
-    # A service to return transaction resource.
-    # + accountId - accountID of the customer.
-    # + return - Transaction resource.
+    # Returns a list of transactions for a particular account.
+    # + accountId - accountId of the customer.
+    # + return - A list of transactions
     resource function get transactions(string accountId) returns wealthmanagementtransactions:Transaction[]|error {
 
         log:printInfo("retriveing transactions", accountId = accountId);
@@ -56,9 +56,9 @@ service / on new http:Listener(9090) {
         return getTransactionsResponse;
     }
 
-    # A service to return investment  accounts details.
+    # Returns a list of inventmennnt accounts for a particular customer.
     # + customerId - unique identifier for customer
-    # + return - InvestmentAccount resource.
+    # + return - A list of invetment accounts
     resource function get investmentaccounts(string customerId) returns InvestmentAccount[]|error {
 
         log:printInfo("Retriveing investment account details of customer", customerId = customerId);
@@ -71,7 +71,7 @@ service / on new http:Listener(9090) {
 
     }
 
-    # A service to return accounts and transaction information for a particular bank.
+    # Returns a list of accounts and transactions for a particular customer.
     # + customerId - unique customer identifier.
     # + bank - bank type.
     # + return - Transaction and Accounts resource.
@@ -108,6 +108,10 @@ service / on new http:Listener(9090) {
     }
 }
 
+# Transform the AccountInformation record to AccountDetails record.
+# + accountInformation - AccountInformation record.
+# + transactions - Transaction records.
+# + return - AccountDetails record.
 function transform(wealthmanagementaccounts:AccountInformation accountInformation, wealthmanagementtransactions:Transaction[] transactions) returns AccountDetails => {
     Bank: accountInformation.Bank,
     Transactions: transactions,
