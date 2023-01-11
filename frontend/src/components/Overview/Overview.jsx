@@ -7,7 +7,7 @@ import {ExpenseView} from "./ExpenseView/ExpenseView";
 import { useState, useEffect } from "react";
 import { getAddedBanks } from '../../services/banks-service';
 import { getAccounts, getInitialAccounts, getTransactions } from '../../services/account-transaction-service';
-import { getTokenFromCookieOrRetrieve, loadBankLogo } from '../../services/utils';
+import { CONSTANTS, getTokenFromCookieOrRetrieve, loadBankLogo } from '../../services/utils';
 
 export const Overview = () => {
     
@@ -26,27 +26,52 @@ export const Overview = () => {
     const populateAppData = async (access_token) => {
         
         setLoading(true);
-        const bankData = await fetchBanks(access_token);
-        for await (let bank of bankData) {
-            upsertBanks(bank);
-            let accountData = await fetchAccounts(access_token, bank.Name.split(" ")[1]);
+        
+        //const newEPAdded = await isNewEPAdded(access_token);
+        const isBankAdded = sessionStorage.getItem(CONSTANTS.is_bank_added);
 
-            for await (let account of accountData) {
-                upsertAccounts(account);
-                let tranData = await fetchTransactions(access_token, account.AccountId);
-
-                for await (let tran of tranData) {
-                    tran.Logo = loadBankLogo(bank.Name);
-                    upsertTransactions(tran);
+        if (isBankAdded) {
+            console.log("Accounts endpoint is found !");
+            const bankData = await fetchBanks(access_token);
+            for await (let bank of bankData) {
+                upsertBanks(bank);
+                let accountData = await fetchAccounts(access_token, bank.Name.split(" ")[1]);
+                for await (let account of accountData) {
+                    upsertAccounts(account);
+                    let tranData = account.Transactions;
+                    for await (let tran of tranData) {
+                        tran.Logo = loadBankLogo(bank.Name);
+                        upsertTransactions(tran);
+                    }
+                }
+                
+                if (bankData.indexOf(bank) === (bankData.length-1)) {
+                    setLoading(false);
                 }
             }
+        } else {
+            console.log("Loading initial app data !");
+            populateInitialAppData(access_token);
+        }
+    }
+
+    const populateInitialAppData = async (access_token) => {
+        let accountData = await fetchInitialAccounts(access_token);
+
+        for await (let account of accountData) {
+            upsertAccounts(account);
+            let tranData = await fetchTransactions(access_token, account.AccountId);
+
+            for await (let tran of tranData) {
+                tran.Logo = loadBankLogo("Investment");
+                upsertTransactions(tran);
+            }
             
-            if (bankData.indexOf(bank) === (bankData.length-1)) {
+            if (accountData.indexOf(account) === (accountData.length-1)) {
                 setLoading(false);
             }
         }
-
-    }
+    } 
 
     const fetchBanks = async (access_token) => {
         try {
@@ -63,14 +88,18 @@ export const Overview = () => {
             const accResp = await getAccounts(access_token, bank_name);
             return accResp.data;
         } catch (error) {
-            console.log("Failed to load accounts for transactions. Re-trying, ", error);
-            try {
-                const resp = await getInitialAccounts(access_token);
-                return resp.data;
-            } catch (err) {
-                console.log("Failed to load accounts for transactions. Caused by, ", err);
-                return [];
-            }
+            console.log("Failed to load accounts for transactions. Caused by, ", error);
+            return [];
+        }
+    }
+
+    const fetchInitialAccounts = async (access_token, bank_name) => {
+        try {
+            const resp = await getInitialAccounts(access_token);
+            return resp.data;
+        } catch (err) {
+            console.log("Failed to load initial accounts for transactions. Caused by, ", err);
+            return [];
         }
     }
 
