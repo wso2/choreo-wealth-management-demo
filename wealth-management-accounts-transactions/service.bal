@@ -4,8 +4,8 @@ import choreotestorganization/wealthmanagementtransactions;
 import ballerina/log;
 import choreotestorganization/wealthmanagementaccounts;
 
-configurable string transactionServiceClientId = ?;
-configurable string transactionServiceClientSecret = ?;
+configurable string clientId = ?;
+configurable string clientSecret = ?;
 
 table<InvestmentAccount> key(CustomerID, AccountId) investmentAccount = table [
     {CustomerID: "001", AccountId: "15687012313258", AccountType: "Savings", Status: "Enabled", StatusUpdateDateTime: time:utcToString(time:utcNow()), Currency: "USD", AccountSubType: "CurrentAccount", Nickname: "Bills", OpeningDate: "2020-12-16T06:06:06+00:00", "MaturityDate": "2025-04-16T06:06:06+00:00", Balance: "$3000.23", Name: "Alex Karter", SecondaryIdentification: "00021"},
@@ -47,8 +47,8 @@ service / on new http:Listener(9090) {
 
         wealthmanagementtransactions:Client transactionsService = check new (config = {
             auth: {
-                clientId: transactionServiceClientId,
-                clientSecret: transactionServiceClientSecret
+                clientId: clientId,
+                clientSecret: clientSecret
 
             }
         });
@@ -77,34 +77,28 @@ service / on new http:Listener(9090) {
     # + return - Transaction and Accounts resource.
     resource function get accountdetails(string customerId = "001", string bank = "Investment") returns AccountDetails[]|error {
 
-        log:printInfo("retrieving account details for customer", customerId = customerId);
-
-        AccountDetails[] accountAndTransactions = [];
-
-        wealthmanagementaccounts:Client accountsService = check new (config = {
+        log:printInfo("get account details and transactions", customerId = customerId, bank = bank);
+        wealthmanagementaccounts:Client accountsEndpoint = check new (config = {
             auth: {
-                clientId: transactionServiceClientId,
-                clientSecret: transactionServiceClientSecret
-            }            
+                clientId: clientId,
+                clientSecret: clientSecret
+            }
         });
-        wealthmanagementaccounts:AccountInformation[] accountInformation = check accountsService->getAccounts(customerId, bank);
 
-        foreach wealthmanagementaccounts:AccountInformation account in accountInformation {
-            log:printInfo("retrieving transactions for bank", bank = bank);
+        wealthmanagementtransactions:Client transactionsEndpoint = check new (config = {
+            auth: {
+                clientId: clientId,
+                clientSecret: clientSecret
+            }
+        });
 
-            wealthmanagementtransactions:Client transactionsService = check new (config = {
-                auth: {
-                    clientId: transactionServiceClientId,
-                    clientSecret: transactionServiceClientSecret
+        wealthmanagementaccounts:AccountInformation[] getAccountsResponse = check accountsEndpoint->getAccounts(customerId = custtomerId, bank = bank);
 
-                }
-            });
-            wealthmanagementtransactions:Transaction[] transactions = check transactionsService->getTransactions(account.AccountId);
-            AccountDetails accountInfo = transform(account, transactions);
-            accountAndTransactions.push(accountInfo);
+        foreach wealthmanagementaccounts:AccountInformation accountInformation in getAccountsResponse {
+            wealthmanagementtransactions:Transaction[] transactions = check transactionsEndpoint->getTransactions(accountInformation.AccountId);
+            AccountDetails accountDetails = transform(accountInformation, transactions);
+            log:printInfo("Account details", accountDetails = accountDetails);
         }
-
-        return accountAndTransactions;
     }
 }
 
