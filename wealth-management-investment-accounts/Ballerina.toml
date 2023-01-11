@@ -1,6 +1,6 @@
 [package]
 org = "sachini"
-name = "wealth_management_testAccounts"
+name = "wealth_management_investment_accounts"
 version = "0.1.0"
 distribution = "2201.2.3"
 

@@ -23,7 +23,7 @@ service / on new http:Listener(9090) {
     # A resource for getting transaction information.
     #
     # + return - transaction information.
-    resource function get transactions(string accountId) returns Transaction[]|error {
+    resource function get transactions(string accountId="15687012313258") returns Transaction[]|error {
 
         log:printInfo("retriveing transactions", accountId = accountId);
 
