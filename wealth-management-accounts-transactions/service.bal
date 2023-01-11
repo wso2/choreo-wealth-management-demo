@@ -51,7 +51,7 @@ service / on new http:Listener(9090) {
                 clientSecret: transactionServiceClientSecret
 
             }
-        }, serviceUrl = "https://c112eada-316e-46a7-9705-df75e4a30edc-dev.e1-us-east-azure.choreoapis.dev/ywsm/wealthmanagementtransactions/1.0.0");
+        });
         wealthmanagementtransactions:Transaction[] getTransactionsResponse = check transactionsService->getTransactions(accountId);
         return getTransactionsResponse;
     }
@@ -85,8 +85,8 @@ service / on new http:Listener(9090) {
             auth: {
                 clientId: transactionServiceClientId,
                 clientSecret: transactionServiceClientSecret
-            }
-        }, serviceUrl = "https://c112eada-316e-46a7-9705-df75e4a30edc-prod.e1-us-east-azure.choreoapis.dev/ywsm/wealthmanagementaccounts/1.0.0");
+            }            
+        });
         wealthmanagementaccounts:AccountInformation[] accountInformation = check accountsService->getAccounts(customerId, bank);
 
         foreach wealthmanagementaccounts:AccountInformation account in accountInformation {
@@ -98,7 +98,7 @@ service / on new http:Listener(9090) {
                     clientSecret: transactionServiceClientSecret
 
                 }
-            }, serviceUrl = "https://c112eada-316e-46a7-9705-df75e4a30edc-prod.e1-us-east-azure.choreoapis.dev/ywsm/wealthmanagementtransactions/1.0.0");
+            });
             wealthmanagementtransactions:Transaction[] transactions = check transactionsService->getTransactions(account.AccountId);
             AccountDetails accountInfo = transform(account, transactions);
             accountAndTransactions.push(accountInfo);
