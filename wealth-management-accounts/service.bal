@@ -17,7 +17,7 @@ service / on new http:Listener(9090) {
     # A resource for getting account information.
     #
     # + return - account information.
-    resource function get accounts(string customerId, string bank) returns AccountInformation[]|error {
+    resource function get accounts(string customerId = "001", string bank = "Investment") returns AccountInformation[]|error {
         
 
         AccountInformation[] accountInfo = from var e in accounts
