@@ -160,6 +160,14 @@ version = "0.0.0"
 
 [[package]]
 org = "ballerina"
+name = "lang.regexp"
+version = "0.0.0"
+dependencies = [
+	{org = "ballerina", name = "jballerina.java"}
+]
+
+[[package]]
+org = "ballerina"
 name = "lang.runtime"
 version = "0.0.0"
 dependencies = [
@@ -171,7 +179,8 @@ org = "ballerina"
 name = "lang.string"
 version = "0.0.0"
 dependencies = [
-	{org = "ballerina", name = "jballerina.java"}
+	{org = "ballerina", name = "jballerina.java"},
+	{org = "ballerina", name = "lang.regexp"}
 ]
 
 [[package]]
@@ -293,10 +302,23 @@ dependencies = [
 	{org = "ballerina", name = "log"},
 	{org = "ballerina", name = "time"},
 	{org = "ballerinai", name = "observe"},
+	{org = "choreotestorganization", name = "wealthmanagementaccounts"},
 	{org = "choreotestorganization", name = "wealthmanagementtransactions"}
 ]
 modules = [
 	{org = "choreotestorganization", packageName = "wealth_management_accounts_transactions", moduleName = "wealth_management_accounts_transactions"}
+]
+
+[[package]]
+org = "choreotestorganization"
+name = "wealthmanagementaccounts"
+version = "1.0.0"
+dependencies = [
+	{org = "ballerina", name = "http"},
+	{org = "ballerina", name = "url"}
+]
+modules = [
+	{org = "choreotestorganization", packageName = "wealthmanagementaccounts", moduleName = "wealthmanagementaccounts"}
 ]
 
 [[package]]

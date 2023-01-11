@@ -2,6 +2,7 @@ import ballerina/http;
 import ballerina/time;
 import choreotestorganization/wealthmanagementtransactions;
 import ballerina/log;
+import choreotestorganization/wealthmanagementaccounts;
 
 configurable string transactionServiceClientId = ?;
 configurable string transactionServiceClientSecret = ?;
@@ -28,6 +29,11 @@ type InvestmentAccount record {
     string SecondaryIdentification;
 };
 
+type AccountDetails record {|
+    *wealthmanagementaccounts:AccountInformation;
+    wealthmanagementtransactions:Transaction[] Transactions;
+|};
+
 # A service representing a network-accessible API
 # bound to port `9090`.
 service / on new http:Listener(9090) {
@@ -45,7 +51,7 @@ service / on new http:Listener(9090) {
                 clientSecret: transactionServiceClientSecret
 
             }
-        }, serviceUrl="https://c112eada-316e-46a7-9705-df75e4a30edc-dev.e1-us-east-azure.choreoapis.dev/ywsm/wealthmanagementtransactions/1.0.0");
+        }, serviceUrl = "https://c112eada-316e-46a7-9705-df75e4a30edc-dev.e1-us-east-azure.choreoapis.dev/ywsm/wealthmanagementtransactions/1.0.0");
         wealthmanagementtransactions:Transaction[] getTransactionsResponse = check transactionsService->getTransactions(accountId);
         return getTransactionsResponse;
     }
@@ -65,5 +71,57 @@ service / on new http:Listener(9090) {
 
     }
 
+    # A service to return accounts and transaction information for a particular bank.
+    # + customerId - unique customer identifier.
+    # + bank - bank type.
+    # + return - Transaction and Accounts resource.
+    resource function get accountdetails(string customerId = "001", string bank = "Investment") returns AccountDetails[]|error {
+
+        log:printInfo("retrieving account details for customer", customerId = customerId);
+
+        AccountDetails[] accountAndTransactions = [];
+
+        wealthmanagementaccounts:Client accountsService = check new (config = {
+            auth: {
+                clientId: transactionServiceClientId,
+                clientSecret: transactionServiceClientSecret
+            }
+        }, serviceUrl = "https://c112eada-316e-46a7-9705-df75e4a30edc-prod.e1-us-east-azure.choreoapis.dev/ywsm/wealthmanagementaccounts/1.0.0");
+        wealthmanagementaccounts:AccountInformation[] accountInformation = check accountsService->getAccounts(customerId, bank);
+
+        foreach wealthmanagementaccounts:AccountInformation account in accountInformation {
+            log:printInfo("retrieving transactions for bank", bank = bank);
+
+            wealthmanagementtransactions:Client transactionsService = check new (config = {
+                auth: {
+                    clientId: transactionServiceClientId,
+                    clientSecret: transactionServiceClientSecret
+
+                }
+            }, serviceUrl = "https://c112eada-316e-46a7-9705-df75e4a30edc-prod.e1-us-east-azure.choreoapis.dev/ywsm/wealthmanagementtransactions/1.0.0");
+            wealthmanagementtransactions:Transaction[] transactions = check transactionsService->getTransactions(account.AccountId);
+            AccountDetails accountInfo = transform(account, transactions);
+            accountAndTransactions.push(accountInfo);
+        }
+
+        return accountAndTransactions;
+    }
 }
 
+function transform(wealthmanagementaccounts:AccountInformation accountInformation, wealthmanagementtransactions:Transaction[] transactions) returns AccountDetails => {
+    Bank: accountInformation.Bank,
+    Transactions: transactions,
+    AccountId: accountInformation.AccountId,
+    Balance: accountInformation.Balance,
+    AccountSubType: accountInformation.AccountSubType,
+    AccountType: accountInformation.AccountType,
+    Currency: accountInformation.Currency,
+    CustomerID: accountInformation.CustomerID,
+    MaturityDate: accountInformation.MaturityDate,
+    Name: accountInformation.Name,
+    Nickname: accountInformation.Nickname,
+    OpeningDate: accountInformation.OpeningDate,
+    SecondaryIdentification: accountInformation.SecondaryIdentification,
+    Status: accountInformation.Status,
+    StatusUpdateDateTime: accountInformation.StatusUpdateDateTime
+};
