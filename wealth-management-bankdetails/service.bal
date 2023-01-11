@@ -41,7 +41,7 @@ service / on new http:Listener(9090) {
     # A service to return investment  accounts details.
     # + customerId - unique identifier for customer
     # + return - addedBank details .
-    resource function get addedBanks(string customerId) returns CustomerLinkedBanks[] {
+    resource function get addedBanks(string customerId="001") returns CustomerLinkedBanks[] {
 
         log:printInfo("retriveing bank details");
 
