@@ -1,4 +1,5 @@
 import {Buffer} from 'buffer';
+import { getAppAccessToken } from './token-service';
 
 export const getBasicAuthHeader = (username, secret) => {
     return "Basic " + Buffer.from(username + ":" + secret).toString("base64");
@@ -7,39 +8,81 @@ export const getBasicAuthHeader = (username, secret) => {
 export const CONSTANTS = {
     app_access_token: "APP_ACCESS_TOKEN",
     user_access_token: "USER_ACCESS_TOKEN",
-    added_banks: "ADDED_BANKS",
-    new_banks: "NEW_BANKS",
-    redirect_response: "REDIRECT_RESPONSE"
+    is_bank_added: "BANK_ADDED",
+    redirect_response: "REDIRECT_RESPONSE",
+    accounts: "ACCOUNTS",
 }
 
-export const loadImage = (data) => {
-
-  const displayName = data?.DisplayName;
-  if (displayName.includes("New Civil Bank")) {
-    return "/bank_logos/NewCivilBank.svg";
-  } else if (displayName.includes("Absolute Bank")) {
-    return "/bank_logos/AbsoluteBank.svg";
-  } else if (displayName.includes("Free Citizen Bank")) {
-    return "/bank_logos/FreeCitizenBank.svg";
-  } else if (displayName.includes("Goldcorp Bank")) {
-    return "/bank_logos/GoldcorpBank.svg";
-  } else if (displayName.includes("Citizens First Bank")) {
-    return "/bank_logos/CitizensFirstBank.svg";
-  } else if (displayName.includes("Royal Crown Trust")) {
-    return "/bank_logos/RoyalCrownTrust.svg";
-  } else {
-    return "/favicon.svg";
+export const loadBankLogo = (bankName) => {
+  if (!bankName) {
+    return "/bank_logos/ContosoInvestment.svg";
   }
-}
-
-export const loadBankLogoByNickName = (bankNickName) => {
-  if (bankNickName.includes("Contoso Retail")) {
+  
+  if (bankName.includes("Retail")) {
     return "/bank_logos/ContosoRetailBank.svg";
-  } else if (bankNickName.includes("Contoso SME")) {
+  } else if (bankName.includes("SME")) {
     return "/bank_logos/ContosoSMEBank.svg";
-  } else if (bankNickName.includes("Contoso Corporate")) {
+  } else if (bankName.includes("Corporate")) {
     return "/bank_logos/ContosoCorpBank.svg";
   }  else {
     return "/bank_logos/ContosoInvestment.svg";
   }
+}
+
+
+export const getCookie = (key) => {
+  const name = `${key}=`;
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const ca = decodedCookie.split(';');
+  for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+          c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length);
+      }
+  }
+  return '';
+};
+
+export const setCookie = (
+  name,
+  value,
+  validityPeriod,
+  path = '/',
+  secured = true,
+) => {
+  let expiresDirective = '';
+  const securedDirective = secured ? '; Secure' : '';
+  if (validityPeriod) {
+      const date = new Date();
+      if (validityPeriod < 0) {
+          date.setTime(date.getTime() + 1000000000000);
+      } else {
+          date.setTime((date.getTime() + validityPeriod * 1000));
+      }
+      expiresDirective = '; expires=' + date.toUTCString();
+  }
+
+  document.cookie = `${name}=${value}; path=${path}${expiresDirective}${securedDirective}`;
+}
+
+export const getTokenFromCookieOrRetrieve = async () => {
+  // generate application access token
+  let app_access_token = getCookie(CONSTANTS.app_access_token);
+  try {
+      if (!app_access_token) {
+
+          const tokenResponse = await getAppAccessToken();
+          app_access_token = tokenResponse.data.access_token;
+
+          // add application access token to session storage
+          setCookie(CONSTANTS.app_access_token, tokenResponse.data.access_token, tokenResponse.data.expires_in);
+          console.log("application access token generated");
+      }
+  } catch (error) {
+      console.log("Failed to generate app access token. Caused by ", error);
+  }
+  return app_access_token;
 }

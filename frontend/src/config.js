@@ -12,11 +12,12 @@ export const CONFIG = {
     ASGARDEO_APP_CONSUMER_KEY: window.env.ASGARDEO_APP_CONSUMER_KEY,
     ASGARDEO_APP_CONSUMER_SECRET: window.env.ASGARDEO_APP_CONSUMER_SECRET,
     ASGARDEO_REDIRECT_URL: window.env.HOST_URL + "/oauth2/callback",
-    CHOREO_URL_TRANSACTIONS_API: window.env.CHOREO_API_HOST + "/accountsandtransactionapi/1.0.0/transactions",
-    CHOREO_URL_ACCOUNTS_API: window.env.CHOREO_API_HOST + "/accountsandtransactionapi/1.0.0/accounts",
+    CHOREO_URL_TRANSACTIONS_API: window.env.CHOREO_API_WAT_HOST + "/wealthaccounttransactions/1.0.0/transactions",
+    CHOREO_URL_ACCOUNTS_API: window.env.CHOREO_API_HOST + "/wealthmanagementaccounts/1.0.0/accounts",
+    CHOREO_URL_BANKS_API: window.env.CHOREO_API_HOST + "/wealthmanagementbanks/1.0.0",
     SIGN_IN_REDIRECT_URL: window.env.HOST_URL + "/dashboard",
     SIGN_OUT_REDIRECT_URL: window.env.HOST_URL + "/",
-    CLIENTID: "6TgsdFvzGEwf86p_L9qjnQdXshYa",
-    BASE_URL: "https://api.asgardeo.io/t/sachinisiriwardene",
-    SCOPE: [ "profile" ]
+    ASGARDEO_BASE_URL: window.env.ASGARDEO_BASE_URL,
+    SCOPE: [ "profile" ],
+    CHOREO_URL_ACC_TRAN_API: window.env.CHOREO_API_HOST + "/wealthaccounttransactions/1.0.0/investmentaccounts",
 };

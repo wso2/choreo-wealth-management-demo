@@ -1,34 +1,43 @@
 import { CONFIG } from "../config";
-import { post } from "./http-client";
+import { get, post } from "./http-client";
 
-export const getTransactions = async (user_access_token) => {
+export const getTransactions = async (user_access_token, accountId) => {
     
     const requestConfig = {
         method: "GET",
-        url: CONFIG.CHOREO_URL_TRANSACTIONS_API,
+        url: CONFIG.CHOREO_URL_TRANSACTIONS_API + "?accountId=" + accountId,
         headers: {
             "accept": "application/json",
-            "Authorization": "Bearer " + user_access_token,
-            "backendServiceClientID": CONFIG.CHOREO_ACCOUNT_SERVICE_CONSUMER_KEY,
-            "backendServiceClientSecret": CONFIG.CHOREO_ACCOUNT_SERVICE_SECRET
+            "Authorization": "Bearer " + user_access_token
         },
     };
 
     return await post(requestConfig);
 }
 
-export const getAccounts = async (user_access_token) => {
+export const getAccounts = async (user_access_token, bankName) => {
 
     const requestConfig = {
         method: "GET",
-        url: CONFIG.CHOREO_URL_ACCOUNTS_API,
+        url: CONFIG.CHOREO_URL_ACCOUNTS_API + "?customerId=001&bank=" + bankName,
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + user_access_token,
-            "backendServiceClientID": CONFIG.CHOREO_ACCOUNT_SERVICE_CONSUMER_KEY,
-            "backendServiceClientSecret": CONFIG.CHOREO_ACCOUNT_SERVICE_SECRET
+            "Authorization": "Bearer " + user_access_token
         },
     };
 
-    return await post(requestConfig);
+    return await get(requestConfig);
+}
+
+export const getInitialAccounts = async (user_access_token) => {
+    const requestConfig = {
+        method: "GET",
+        url: CONFIG.CHOREO_URL_ACCOUNTS_API + "?customerId=001&bank=Investment",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + user_access_token
+        },
+    };
+
+    return await get(requestConfig);
 }

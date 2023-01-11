@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nav, NavDropdown, Image} from 'react-bootstrap';
-import avatar from "../../assets/images/avatar.svg";
+import avatar from "../../assets/images/avatar.jpg";
 
 export const ProfileNav = () => {
     return (
@@ -19,7 +19,7 @@ export const ProfileNav = () => {
                          title={
                 <div>
                     <Image roundedCircle={true} src={avatar} height="36px"/>
-                    <span className="ml-4">John Doe</span>
+                    <span className="ml-4">Alex Lin</span>
                 </div>
             }
             >
@@ -27,7 +27,7 @@ export const ProfileNav = () => {
                     <i className="fi fi-rr-user"></i>
                     <span>My Profile</span>
                 </NavDropdown.Item>
-                <NavDropdown.Item eventKey="4.2">
+                <NavDropdown.Item eventKey="4.2" href="/logout">
                     <i className="fi fi-rr-sign-out-alt"></i>
                     <span>Logout</span>
                 </NavDropdown.Item>
