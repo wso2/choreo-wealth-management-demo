@@ -92,13 +92,17 @@ service / on new http:Listener(9090) {
             }
         });
 
-        wealthmanagementaccounts:AccountInformation[] getAccountsResponse = check accountsEndpoint->getAccounts(customerId = custtomerId, bank = bank);
+        AccountDetails[] accountsAndTransactions = [];
+
+        wealthmanagementaccounts:AccountInformation[] getAccountsResponse = check accountsEndpoint->getAccounts(customerId = customerId, bank = bank);
 
         foreach wealthmanagementaccounts:AccountInformation accountInformation in getAccountsResponse {
             wealthmanagementtransactions:Transaction[] transactions = check transactionsEndpoint->getTransactions(accountInformation.AccountId);
             AccountDetails accountDetails = transform(accountInformation, transactions);
             log:printInfo("Account details", accountDetails = accountDetails);
+            accountsAndTransactions.push(accountDetails);
         }
+        return accountsAndTransactions;
     }
 }
 
