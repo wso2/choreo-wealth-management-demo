@@ -13,7 +13,7 @@ export const CONFIG = {
     ASGARDEO_APP_CONSUMER_SECRET: window.env.ASGARDEO_APP_CONSUMER_SECRET,
     ASGARDEO_REDIRECT_URL: window.env.HOST_URL + "/oauth2/callback",
     CHOREO_URL_TRANSACTIONS_API: window.env.CHOREO_API_WAT_HOST + "/wealthaccounttransactions/1.0.0/transactions",
-    CHOREO_URL_ACCOUNTS_API: window.env.CHOREO_API_HOST + "/wealthmanagementaccounts/1.0.0/accounts",
+    CHOREO_URL_ACCOUNTS_API: window.env.CHOREO_API_HOST + "/wealthaccounttransactions/1.0.0/accountdetails",
     CHOREO_URL_BANKS_API: window.env.CHOREO_API_HOST + "/wealthmanagementbanks/1.0.0",
     SIGN_IN_REDIRECT_URL: window.env.HOST_URL + "/dashboard",
     SIGN_OUT_REDIRECT_URL: window.env.HOST_URL + "/",

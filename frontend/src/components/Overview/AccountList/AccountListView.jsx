@@ -26,7 +26,7 @@ export const AccountListView = ({accounts}) => {
     <div className="row account-details-container justify-content-between mb-4">
       
       <div className={"col-sm-12 " + (isNewBankAvailable ? "col-md-10" : "")}>
-        <OwlCarousel className='owl-theme' margin={10} loop >
+        <OwlCarousel className='owl-theme' margin={10} >
           {accounts && accounts.map((account, id) => (<AccountCard itemId={id} key={id} account={account}/>))}
         </OwlCarousel>
       </div>
@@ -49,7 +49,7 @@ export const AccountListView = ({accounts}) => {
 const shouldDisplayButton = async () => {
   try {
     const access_token = await getTokenFromCookieOrRetrieve();
-    await getAccounts(access_token);
+    await getAccounts(access_token, "Investment");
     return true;
   } catch (err) {
     console.log("Failed to load accounts endpoint. Caused by, ", err.message);
