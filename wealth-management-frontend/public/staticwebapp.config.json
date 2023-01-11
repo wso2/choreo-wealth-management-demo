@@ -1,0 +1,31 @@
+{
+    "routes": [
+        {
+            "route": "/"
+        },
+        {
+            "route": "/login"
+        },
+        {
+            "route": "/dashboard"
+        },
+        {
+            "route": "/banks"
+        },
+        {
+            "route": "/oauth2/callback"
+        },
+        {
+            "route": "/logout"
+        }
+    ],
+    "navigationFallback": {
+        "rewrite": "/index.html",
+        "exclude": [
+            "/*.{png,jpg,svg}",
+            "/bank_logos/*.{png,jpg,svg}",
+            "/static/media/*.{png,jpg,jpeg,gif,bmp}",   
+            "/static/css/*"
+        ]
+    }
+}
