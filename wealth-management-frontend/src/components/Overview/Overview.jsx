@@ -7,7 +7,7 @@ import {ExpenseView} from "./ExpenseView/ExpenseView";
 import { useState, useEffect } from "react";
 import { getAddedBanks } from '../../services/banks-service';
 import { getAccounts, getInitialAccounts, getTransactions } from '../../services/account-transaction-service';
-import { CONSTANTS, getTokenFromCookieOrRetrieve, loadBankLogo } from '../../services/utils';
+import { CONSTANTS, getTokenFromCookieOrRetrieve } from '../../services/utils';
 
 export const Overview = () => {
     
@@ -37,10 +37,11 @@ export const Overview = () => {
                 upsertBanks(bank);
                 let accountData = await fetchAccounts(access_token, bank.Name.split(" ")[1]);
                 for await (let account of accountData) {
+                    account.BankName = bank.Name;
                     upsertAccounts(account);
                     let tranData = account.Transactions;
                     for await (let tran of tranData) {
-                        tran.Logo = loadBankLogo(bank.Name);
+                        tran.BankName = bank.Name;
                         upsertTransactions(tran);
                     }
                 }
@@ -59,11 +60,12 @@ export const Overview = () => {
         let accountData = await fetchInitialAccounts(access_token);
 
         for await (let account of accountData) {
+            account.BankName = "Contoso Investment Bank";
             upsertAccounts(account);
             let tranData = await fetchTransactions(access_token, account.AccountId);
 
             for await (let tran of tranData) {
-                tran.Logo = loadBankLogo("Investment");
+                tran.BankName = "Contoso Investment Bank";
                 upsertTransactions(tran);
             }
             
@@ -145,6 +147,13 @@ export const Overview = () => {
             </>
         )
     } else {
-        <div>Loading...</div>
+        return (
+            <div className="d-flex justify-content-center">
+                <div className="spinner-border text-primary" role="status" 
+                    style={{"width": "3rem", "height": "3rem"}}>
+                    <span className="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        )
     }
 }

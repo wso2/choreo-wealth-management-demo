@@ -10,16 +10,10 @@ export const ProfileInfo = () => {
                     <Image roundedCircle={true} src={avatar} style={{height: "120px", width: "120px", "objectFit": "cover"}} />
                 </div>
                 <div className="profile-info-section">
-                    <h5>
-                        Alex Lin<span className="text-muted fs-6"> (alex_lin)</span>
-                    </h5>
+                    <h5> Alex Lim<span className="text-muted fs-6"> (alex_lim)</span> </h5>
                     <span className="text-muted"><i className="fi fi-rr-briefcase"></i>Software Engineer</span><br/>
-                    <span className="text-muted"><i className="fi fi-rr-marker"></i>Bay Area, San Francisco, CA</span>
-                    <p className="mt-2 mb-0">
-                        <span className="text-muted">Contact:</span>
-                        <span> alex_lin@email.com, </span>
-                        <span>(+239) 816-9029</span>
-                    </p>
+                    <span className="text-muted"><i className="fi fi-rr-marker"></i>Bay Area, San Francisco, CA</span><br/>
+                    <span className="text-muted"><i className="bi bi-telephone"></i>alex_lim@email.com,(+239) 816-9029</span>
                 </div>
             </div>
             <div className="empty"/>

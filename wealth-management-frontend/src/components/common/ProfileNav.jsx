@@ -19,7 +19,7 @@ export const ProfileNav = () => {
                          title={
                 <div>
                     <Image roundedCircle={true} src={avatar} height="36px"/>
-                    <span className="ml-4">Alex Lin</span>
+                    <span className="ml-4">Alex Lim</span>
                 </div>
             }
             >
