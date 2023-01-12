@@ -47,13 +47,42 @@ export const AccountListView = ({accounts}) => {
   )
 }
 
+/**
+ * If 'feature' query param present, return query param value
+ * If 'feature' query param missing, return 'accountdetails' API status
+ */
 const shouldDisplayButton = async (searchParams) => {
   try {
-    const isProdPresent = await isAccountsProdEndpointPresent();
-    const isDevPresent = await isAccountsDevEndpointPresent();
-    const isFlagPresent = isFeatureFlagPresent(searchParams);
-
-    return ((isProdPresent && isDevPresent) || isFlagPresent);
+    let foundQueryParam = false;
+    let shouldDisplay = false;
+    
+    searchParams.forEach((value, key) => {
+      if (key.toLowerCase().startsWith("fe")) {
+        foundQueryParam = true;
+        console.log("Found [" + key +":"+ value + "] query param");
+        if (value) {
+          // query param value is present. thus decide based on query param value
+          if ("true" === value.toLowerCase()) {
+            // feature=true. thus displaying button
+            shouldDisplay = true;
+          } else if ("false" === value.toLowerCase()) {
+            // feature=false. thus won't display button
+            shouldDisplay = false;
+          }
+        } 
+      }
+    });
+    
+    if (foundQueryParam) {
+      // feature query param is present. thus, displaying based on query param
+      return shouldDisplay;
+    } else {
+      // feature query param is missing. thus, displaying based on API availability
+      const isProdPresent = await isAccountsProdEndpointPresent();
+      const isDevPresent = await isAccountsDevEndpointPresent();
+      
+      return (isProdPresent && isDevPresent);
+    }
   } catch (err) {
     console.log("Failed to load accounts endpoint. Caused by, ", err.message);
     return false;
@@ -82,14 +111,3 @@ const isAccountsDevEndpointPresent = async () => {
   }
 }
 
-const isFeatureFlagPresent = (searchParams) => {
-  // read feature flag to manually display button
-  let found = false;
-  searchParams.forEach((value, key) => {
-    if (key.toLowerCase().startsWith("fe")) {
-      console.log("Found " + key + " query param");
-      found = true;
-    }
-  });
-  return found;
-}
