@@ -27,7 +27,7 @@ return (
                         </div>
                         <div className="form-group">
                             <label className="form-label" htmlFor="formGroupPassword">Password</label>
-                            <input type="text" className="form-control" id="formGroupPassword"
+                            <input type="password" className="form-control" id="formGroupPassword"
                                    placeholder="Password" />
                         </div>
 						<div className="form-group">
