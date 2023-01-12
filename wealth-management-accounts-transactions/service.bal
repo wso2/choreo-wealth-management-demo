@@ -71,7 +71,7 @@ service / on new http:Listener(9090) {
 
     }
 
-    resource function get accountdetails/[string customerId]/[string bank]() returns AccountDetails[]|error {
+    resource function get accountInformation/[string customerId]/[string bank]() returns AccountDetails[]|error {
         log:printInfo("get account details and transactions", customerId = customerId, bank = bank);
         wealthmanagementaccounts:Client accountsEndpoint = check new (config = {
             auth: {
