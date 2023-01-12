@@ -29,6 +29,20 @@ export const getAccounts = async (user_access_token, bankName) => {
     return await get(requestConfig);
 }
 
+export const getDevAccounts = async (user_access_token, bankName) => {
+
+    const requestConfig = {
+        method: "GET",
+        url: CONFIG.CHOREO_URL_ACCOUNTS_API_DEV + "?customerId=001&bank=" + bankName,
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + user_access_token
+        },
+    };
+
+    return await get(requestConfig);
+}
+
 export const getInitialAccounts = async (user_access_token) => {
     const requestConfig = {
         method: "GET",
