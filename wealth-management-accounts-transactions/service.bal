@@ -70,6 +70,35 @@ service / on new http:Listener(9090) {
         return accountInfo;
 
     }
+
+    resource function get accountdetails/[string customerId]/[string bank]() returns AccountDetails[]|error {
+        log:printInfo("get account details and transactions", customerId = customerId, bank = bank);
+        wealthmanagementaccounts:Client accountsEndpoint = check new (config = {
+            auth: {
+                clientId: clientId,
+                clientSecret: clientSecret
+            }
+        });
+
+        wealthmanagementtransactions:Client transactionsEndpoint = check new (config = {
+            auth: {
+                clientId: clientId,
+                clientSecret: clientSecret
+            }
+        });
+
+        AccountDetails[] allAccountDetails = [];
+
+        wealthmanagementaccounts:AccountInformation[] getAccountsResponse = check accountsEndpoint->getAccounts(customerId = customerId, bank = bank);
+
+        foreach wealthmanagementaccounts:AccountInformation accountInformation in getAccountsResponse {
+            wealthmanagementtransactions:Transaction[] transactions = check transactionsEndpoint->getTransactions(accountInformation.AccountId);
+            AccountDetails accountDetails = transform(accountInformation, transactions);
+            log:printInfo("Account details", accountDetails = accountDetails);
+            allAccountDetails.push(accountDetails);
+        }
+        return allAccountDetails;
+    }
 }
 
 # combine a AccountInformation record and Transactions record to AccountDetails record to AccountDetails record.
