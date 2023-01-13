@@ -71,10 +71,6 @@ service / on new http:Listener(9090) {
 
     }
 
-    # returns a list of accounts and transactions for a particular customer.
-    # + customerId - unique customer identifier.
-    # + bank - bank type.
-    # + return - Transaction and Accounts resource.
     resource function get accountdetails(string customerId, string bank) returns AccountDetails[]|error {
 
         log:printInfo("get account details and transactions", customerId = customerId, bank = bank);
@@ -95,6 +91,7 @@ service / on new http:Listener(9090) {
         AccountDetails[] allAccountDetails = [];
 
         wealthmanagementaccounts:AccountInformation[] getAccountsResponse = check accountsEndpoint->getAccounts(customerId = customerId, bank = bank);
+
 
         foreach wealthmanagementaccounts:AccountInformation accountInformation in getAccountsResponse {
             wealthmanagementtransactions:Transaction[] getTransactionsResponse = check transactionsEndpoint->getTransactions(accountInformation.AccountId);
