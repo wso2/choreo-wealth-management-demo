@@ -27,11 +27,10 @@ export const Overview = () => {
         
         setLoading(true);
         
-        //const newEPAdded = await isNewEPAdded(access_token);
         const isBankAdded = sessionStorage.getItem(CONSTANTS.is_bank_added);
 
         if (isBankAdded) {
-            console.log("Accounts endpoint is found !");
+            console.log("Found new bank !");
             const bankData = await fetchBanks(access_token);
             for await (let bank of bankData) {
                 upsertBanks(bank);
