@@ -88,19 +88,18 @@ service / on new http:Listener(9090) {
     }
 
     # A service to reset the linked banks
-    # + investmentBank - new bank added for customer
+    # + removedBank - new bank added for customer
     # + return - LinekedBankResponse result of adding new bank to customer profile
-    resource function post linkinvestmentbank(@http:Payload LinkedBanks investmentBank) returns LinekedBankResponse {
+    resource function post linkinvestmentbank(@http:Payload LinkedBanks removedBank) returns LinekedBankResponse {
 
-        linkedBanks = table [
-            {CustomerID: "001", BankID: "4"}
-        ];
-        LinkedBanks[] addedBanks = from var addedBank in linkedBanks
-            where addedBank.BankID == investmentBank.BankID
-            select addedBank;
+
+
+        LinkedBanks removed = linkedBanks.remove([removedBank.CustomerID,removedBank.BankID]);
         
+        log:printInfo("Removed bank " , bank = removedBank.BankID);
+
         LinekedBankResponse result;
-        if (addedBanks.length() != 0) {
+        if (removed.CustomerID == removedBank.CustomerID && removed.BankID == removedBank.BankID) {
             result = {success: true};
         } else {
             result = {success: false};
