@@ -1,6 +1,6 @@
 import { getTokenFromCookieOrRetrieve } from "../../services/utils";
 import { Card, Image } from 'react-bootstrap';
-import { addBank } from "../../services/banks-service";
+import { addBank, deleteBank } from "../../services/banks-service";
 
 export const BankCard = ({bank, updateBank, setToastMsg}) => {
 
@@ -20,7 +20,13 @@ export const BankCard = ({bank, updateBank, setToastMsg}) => {
     const handleBankDelete = (event, bankId) => {
         event.preventDefault();
         updateBank(bankId, false);
-        setToastMsg("Successfully deleted the bank!")
+        getTokenFromCookieOrRetrieve().then(access_token => {
+            deleteBank(access_token, bankId)
+                .then(resp => setToastMsg("Successfully deleted the bank!"))
+                .catch(err => {
+                    setToastMsg("Bank deletion failed, Try again!")
+                    console.log("Failed to delete bank. Caused by, ", err)});
+        })
     }
 
     /*
