@@ -11,7 +11,7 @@ export const AccountCard = ({account}) => {
 
             <div className="account-details d-flex flex-column mt-3">
                 <h5 className="account-number mb-1">{account.AccountId} ({account.AccountType})</h5>
-                <h6 className="account-name mb-0">{account.BankName}</h6>
+                <h6 className="account-name mb-0">{account.BankName}, {account.BankCountry}</h6>
             </div>
         </Card>
     )
