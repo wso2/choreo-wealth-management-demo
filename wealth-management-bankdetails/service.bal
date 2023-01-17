@@ -52,7 +52,7 @@ service / on new http:Listener(9090) {
             where addedBank.CustomerID == customerId
             select addedBank;
 
-        log:printInfo("Linked Banks", banks=addedBanks.length());
+        log:printInfo("Linked Banks ", banks=addedBanks.length());
 
         CustomerLinkedBanks[] customerBanks = [];
         foreach BankDetails bank in bankDetails {
