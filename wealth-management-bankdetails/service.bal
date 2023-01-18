@@ -42,7 +42,7 @@ type LinkedBanks record {
 service / on new http:Listener(9090) {
 
 
-   # resource to return investment  accounts details.
+   # resource to return investment  account details.
    # + customerId - unique identifier for customer
    # + return - list of added banks of customer .
    resource function get addedBanks(string customerId = "001") returns AddedBanks[]|error {
