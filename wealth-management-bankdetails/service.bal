@@ -76,7 +76,7 @@ service / on new http:Listener(9090) {
 
     log:printInfo("Adding new bank for customer", customerID=linkedBank.CustomerID);
 
-    sql:ParameterizedQuery addBank = `INSERT INTO linkedbank (CustomerID, BankID) VALUE (${linkedBank.CustomerID}, ${linkedBank.BankID})`;
+    sql:ParameterizedQuery addBank = `INSERT INTO linkedbank (CustomerID, BankID) VALUES (${linkedBank.CustomerID}, ${linkedBank.BankID})`;
 
     sql:ExecutionResult result = check mssql->execute(addBank);
 
