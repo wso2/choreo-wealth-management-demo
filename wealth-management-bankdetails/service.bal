@@ -1,113 +1,120 @@
 import ballerina/http;
 import ballerina/log;
+import ballerinax/mysql;
+import ballerinax/mysql.driver as _;
+import ballerina/sql;
 
-table<BankDetails> key(BankID) banks = table [
-    {BankID: "1", Name: "Contoso Retail Bank", Country: "Wales"},
-    {BankID: "2", Name: "Contoso SME Bank", Country: "Scotland"},
-    {BankID: "3", Name: "Contoso Corporate Bank", Country: "England"},
-    {BankID: "4", Name: "Contoso Investment Bank", Country: "Wales"}
-];
 
-table<LinkedBanks> key(CustomerID, BankID) linkedBanks = table [
-    {CustomerID: "001", BankID: "4"}
-];
+configurable string dbHost = ?;
+configurable string dbUser = ?;
+configurable string dbPassword = ?;
+configurable string dbName = ?;
+configurable int dbPort = ?;
 
-type BankDetails record {
-    readonly string BankID;
-    string Name;
-    string Country;
+
+mysql:Client mssql = check new (
+host = dbHost,
+user = dbUser,
+password = dbPassword,
+database = dbName,
+port = dbPort
+);
+
+
+type AddedBanks record {
+   string BankId;
+   string Name;
+   string Country;
+   string CustomerID;
 };
+
+type EditBankResponse record {|
+   boolean success;
+|};
 
 type LinkedBanks record {
-    readonly string CustomerID;
-    readonly string BankID;
+   readonly string CustomerID;
+   readonly string BankID;
 };
-
-type CustomerLinkedBanks record {
-    string BankID;
-    string Name;
-    string Country;
-    string CustomerID;
-};
-
-type LinekedBankResponse record {|
-    boolean success;
-|};
 
 # A service representing a network-accessible API
 # bound to port `9090`.
 service / on new http:Listener(9090) {
 
-    # A service to return investment  accounts details.
-    # + customerId - unique identifier for customer
-    # + return - addedBank details .
-     resource function get addedBanks(string customerId="001") returns CustomerLinkedBanks[] {
 
-        log:printInfo("retriveing bank details");
-
-        BankDetails[] bankDetails = from var bank in banks
-            select bank;
-
-        LinkedBanks[] addedBanks = from var addedBank in linkedBanks
-            where addedBank.CustomerID == customerId
-            select addedBank;
+   # resource to return investment  accounts details.
+   # + customerId - unique identifier for customer
+   # + return - addedBank details .
+   resource function get addedBanks(string customerId = "001") returns AddedBanks[]|error {
 
 
-        log:printInfo("Linked Banks", banks=addedBanks.length());
+       log:printInfo("retriveing bank details");
 
+       sql:ParameterizedQuery selectLinkedBank = `SELECT banks.BankId, banks.Name, banks.Country, linkedbank.CustomerID  FROM banks INNER JOIN linkedbank ON (banks.BankId = linkedbank.BankID) WHERE linkedbank.CustomerID = ${customerId};`;
 
-        CustomerLinkedBanks[] customerBanks = [];
-        foreach BankDetails bank in bankDetails {
-            foreach LinkedBanks linkedBank in addedBanks {
-                if (bank.BankID == linkedBank.BankID) {
-                    CustomerLinkedBanks customerBank = {CustomerID: linkedBank.CustomerID, BankID: bank.BankID, Name: bank.Name, Country: bank.Country};
-                    customerBanks.push(customerBank);
-                }
-            }
-
-        }
-        return customerBanks;
-    }
-
-    # A service to link newly added bank to customer profile.
-    # + linkedBank - new bank added for customer
-    # + return - LinekedBankResponse result of adding new bank to customer profile
-    resource function post linkBank(@http:Payload LinkedBanks linkedBank) returns LinekedBankResponse {
-
-        log:printInfo("linking new bank to customer");
-
-        linkedBanks.add(linkedBank);
-
-        LinkedBanks[] addedBanks = from var addedBank in linkedBanks
-            where addedBank.BankID == linkedBank.BankID
-            select addedBank;
-
-        LinekedBankResponse result;
-        if (addedBanks.length() != 0) {
-            result = {success: true};
-        } else {
-            result = {success: false};
-        }
-        return result;
-    }
-
-    # A service to reset the linked banks
-    # + removedBank - new bank added for customer
-    # + return - LinekedBankResponse result of adding new bank to customer profile
-    resource function post linkinvestmentbank(@http:Payload LinkedBanks removedBank) returns LinekedBankResponse {
-
-
-
-        LinkedBanks removed = linkedBanks.remove([removedBank.CustomerID,removedBank.BankID]);
+        stream<AddedBanks, sql:Error?> linkedBanksStream = mssql->query(selectLinkedBank);
         
-        log:printInfo("Removed bank " , bank = removedBank.BankID);
+        AddedBanks[] customerBanks = [];
 
-        LinekedBankResponse result;
-        if (removed.CustomerID == removedBank.CustomerID && removed.BankID == removedBank.BankID) {
-            result = {success: true};
-        } else {
-            result = {success: false};
-        }
-        return result;
+        log:printInfo("Accessing data from DB");
+
+        check from AddedBanks customerbank in linkedBanksStream
+           do {
+               AddedBanks customerBank = {CustomerID: customerbank.CustomerID, BankId: customerbank.BankId, Name: customerbank.Name, Country: customerbank.Country};
+               customerBanks.push(customerBank);
+           };
+
+        return customerBanks;
+
     }
+
+
+   # resource to add new bank
+   # + linkedBank - new bank added for customer
+   # + return - LinekedBankResponse result of adding new bank to customer profile
+   resource function post linkBank(@http:Payload LinkedBanks linkedBank) returns EditBankResponse|error {
+
+    log:printInfo("Adding new bank for customer", customerID=linkedBank.CustomerID);
+
+    sql:ParameterizedQuery addBank = `INSERT INTO linkedbank (CustomerID, BankID) VALUE (${linkedBank.CustomerID}, ${linkedBank.BankID})`;
+
+    sql:ExecutionResult result = check mssql->execute(addBank);
+
+    log:printInfo("Add new bank to DB");
+
+    EditBankResponse addeBankResponse;
+
+    if (result.affectedRowCount == 1) {
+           addeBankResponse = {success: true};
+    } else {
+           addeBankResponse = {success: false};
+    }
+
+    return addeBankResponse;
+
+    }
+
+
+   #resource to removed the linked banks
+   # + removedBank - new bank added for customer
+   # + return - LinekedBankResponse result of adding new bank to customer profile
+   resource function post linkinvestmentbank(@http:Payload LinkedBanks removedBank) returns EditBankResponse|error {
+
+    log:printInfo("Adding new bank for customer", bankID=removedBank.BankID);
+
+    sql:ParameterizedQuery deleteBank = `DELETE from linkedbank WHERE CustomerID = ${removedBank.CustomerID} AND BankID = ${removedBank.BankID}`;
+      
+    sql:ExecutionResult deleteResult = check mssql->execute(deleteBank);
+
+    log:printInfo("Removed bank from DB");
+
+    EditBankResponse removedBankResponse;
+
+    if (deleteResult.affectedRowCount == 1) {
+        removedBankResponse = {success: true};
+    } else {
+        removedBankResponse = {success: false};
+    }
+       return removedBankResponse;
+   }
 }
