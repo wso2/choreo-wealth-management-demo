@@ -53,7 +53,7 @@ service / on new http:Listener(9090) {
 
         AddedBanks[] customerBanks = [];
 
-        log:printInfo("Accessing data from DB");
+        log:printInfo("Linked Banks ", banks=addedBanks.length());
 
         check from AddedBanks customerbank in linkedBanksStream
             do {
