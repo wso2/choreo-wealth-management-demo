@@ -1,7 +1,7 @@
 import ballerina/http;
 import ballerina/log;
-import ballerinax/mysql;
-import ballerinax/mysql.driver as _;
+import ballerinax/mssql;
+import ballerinax/mssql.driver as _;
 import ballerina/sql;
 
 
@@ -12,7 +12,7 @@ configurable string dbName = ?;
 configurable int dbPort = ?;
 
 
-mysql:Client mssql = check new (
+mssql:Client mssql = check new (
 host = dbHost,
 user = dbUser,
 password = dbPassword,
