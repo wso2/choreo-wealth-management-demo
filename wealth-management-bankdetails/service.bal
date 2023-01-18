@@ -69,7 +69,7 @@ service / on new http:Listener(9090) {
     }
 
 
-   # resource to add new bank
+   # resource to add new bank for customer
    # + linkedBank - new bank added for customer
    # + return - LinekedBankResponse result of adding new bank to customer profile
    resource function post linkBank(@http:Payload LinkedBanks linkedBank) returns EditBankResponse|error {
