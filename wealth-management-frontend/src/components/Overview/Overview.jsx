@@ -17,10 +17,13 @@ export const Overview = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        
         // loading initial app data
         getTokenFromCookieOrRetrieve().then(access_token => {
             populateAppData(access_token);
-        })
+        });
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [accounts, banks, transactions])
 
     const populateAppData = async (access_token) => {
@@ -37,6 +40,7 @@ export const Overview = () => {
                 let accountData = await fetchAccounts(access_token, bank.Name.split(" ")[1]);
                 for await (let account of accountData) {
                     account.BankName = bank.Name;
+                    account.BankCountry = bank.Country;
                     upsertAccounts(account);
                     let tranData = account.Transactions;
                     for await (let tran of tranData) {
@@ -60,6 +64,7 @@ export const Overview = () => {
 
         for await (let account of accountData) {
             account.BankName = "Contoso Investment Bank";
+            account.BankCountry = "Wales";
             upsertAccounts(account);
             let tranData = await fetchTransactions(access_token, account.AccountId);
 
@@ -137,7 +142,7 @@ export const Overview = () => {
     if (!loading) {
         return (
             <>
-                <ProfileInfo/>
+                <ProfileInfo accounts={accounts}/>
                 <AccountListView accounts={accounts}/>
                 <Row className="mb-4">
                     <Col lg={7}><TransactionListView transactions={transactions}/></Col>
