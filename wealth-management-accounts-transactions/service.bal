@@ -72,7 +72,6 @@ service / on new http:Listener(9090) {
     }
 
     resource function get accountdetails(string customerId, string bank) returns AccountDetails[]|error {
-
     log:printInfo("get account details and transactions", customerId = customerId, bank = bank);
     wealthmanagementaccounts:Client accountsEndpoint = check new (config = {
         auth: {
@@ -92,14 +91,14 @@ service / on new http:Listener(9090) {
 
     wealthmanagementaccounts:AccountInformation[] getAccountsResponse = check accountsEndpoint->getAccounts(customerId = customerId, bank = bank);
 
+
     foreach wealthmanagementaccounts:AccountInformation accountInformation in getAccountsResponse {
         wealthmanagementtransactions:Transaction[] getTransactionsResponse = check transactionsEndpoint->getTransactions(accountInformation.AccountId);
         AccountDetails accountDetails = transform(accountInformation, getTransactionsResponse);
         allAccountDetails.push(accountDetails);
-
-
+    
     }
-            return allAccountDetails;
+        return allAccountDetails;
     }
 }
 
