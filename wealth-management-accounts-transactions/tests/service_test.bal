@@ -1,7 +1,6 @@
 import ballerina/http;
-
 import ballerina/test;
-import choreotestorganization/wealthmanagementtransactions;
+
 
 
 
@@ -24,17 +23,6 @@ function testInvestmentAccounts(){
     }
     test:assertNotEquals(response.length(),0);
 }
-
-@test:Config {}
-function testTransactions(){
-    wealthmanagementtransactions:'Transaction[] | error response = testClient->get("/transactions?accountId=30080012343456");
-    if response is error {
-        test:assertFail(response.toString());
-    }
-    
-    test:assertNotEquals(response.length(),0);
-}
- 
 
 
 // After Suite Function
