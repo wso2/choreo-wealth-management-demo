@@ -25,6 +25,15 @@ function testInvestmentAccounts(){
 }
 
 
+@test:Config {}
+function testAccountDetails(){
+    AccountDetails[] | error response = testClient->get("/accountdetails?customerId=001");
+    if response is error {
+        test:assertFail(response.toString());
+    }
+    test:assertNotEquals(response.length(),1);
+}
+
 // After Suite Function
 
 @test:AfterSuite
