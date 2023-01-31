@@ -1,5 +1,7 @@
 import React from 'react';
 import { Nav, NavDropdown, Image} from 'react-bootstrap';
+import { APP_CONFIG } from '../../config';
+import avatar_wm from "../../assets/images/avatar-wm.jpg"
 
 export const ProfileNav = () => {
     return (
@@ -17,11 +19,11 @@ export const ProfileNav = () => {
             <NavDropdown id="nav-dropdown" title={
                 <div className="row">
                     <div className="col">
-                        <Image roundedCircle={true} src="https://i.pravatar.cc/150?img=59" height="36px"/>
+                        <Image roundedCircle={true} src={avatar_wm} height="36px"/>
                     </div>
                     <div className="col text-center">
                         <div className="row">
-                            <span className="ml-4">John Smith</span>
+                            <span className="ml-4">{APP_CONFIG.WEALTH_MANAGER.NAME}</span>
                         </div>
                         <div className="row">
                             <span className="text-muted"> (Wealth Manager)</span>

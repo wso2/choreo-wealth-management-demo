@@ -7,7 +7,7 @@ export const Logout = () => {
     
     getTokenFromCookieOrRetrieve().then(access_token => {
         
-        ["1", "2", "3"].forEach(bankId => {
+        ["6", "7", "8"].forEach(bankId => {
             deleteBank(access_token, bankId)
             .then(resp => console.log(resp.data))
             .catch(err => console.log(err));

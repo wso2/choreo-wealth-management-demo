@@ -1,4 +1,4 @@
-import { getTokenFromCookieOrRetrieve } from "../../services/utils";
+import { getTokenFromCookieOrRetrieve, loadBankLogo } from "../../services/utils";
 import { Card, Image } from 'react-bootstrap';
 import { addBank, deleteBank } from "../../services/banks-service";
 
@@ -19,10 +19,12 @@ export const BankCard = ({bank, updateBank, setToastMsg}) => {
 
     const handleBankDelete = (event, bankId) => {
         event.preventDefault();
-        updateBank(bankId, false);
         getTokenFromCookieOrRetrieve().then(access_token => {
             deleteBank(access_token, bankId)
-                .then(resp => setToastMsg("Successfully deleted the bank!"))
+            .then(resp => {
+                    updateBank(bankId, false);
+                    setToastMsg("Successfully deleted the bank!");
+                })
                 .catch(err => {
                     setToastMsg("Bank deletion failed, Try again!")
                     console.log("Failed to delete bank. Caused by, ", err)});
@@ -62,7 +64,7 @@ export const BankCard = ({bank, updateBank, setToastMsg}) => {
 
     return (
         <Card className="col p-4 mb-3 me-3 bank-card" id="bank-card" border="light">
-            <Image src={bank.logo} width="40px" roundedCircle={true} />
+            <Image src={loadBankLogo(bank.name)} width="40px" roundedCircle={true} />
             <div className="d-flex align-items-baseline flex-column my-3">
                 <h5 className="bank-name mb-0">{bank.name}</h5>
                 <span className="bank-location text-uppercase">{bank.country}</span>

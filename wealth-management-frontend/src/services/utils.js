@@ -1,5 +1,6 @@
 import {Buffer} from 'buffer';
 import { getAppAccessToken } from './token-service';
+import { APP_CONFIG } from '../config'; 
 
 export const getBasicAuthHeader = (username, secret) => {
     return "Basic " + Buffer.from(username + ":" + secret).toString("base64");
@@ -15,17 +16,17 @@ export const CONSTANTS = {
 
 export const loadBankLogo = (bankName) => {
   if (!bankName) {
-    return "/bank_logos/ContosoInvestment.svg";
+    return APP_CONFIG.BANKS.DEFAULT.LOGO;
   }
   
-  if (bankName.includes("Retail")) {
-    return "/bank_logos/ContosoRetailBank.svg";
-  } else if (bankName.includes("SME")) {
-    return "/bank_logos/ContosoSMEBank.svg";
-  } else if (bankName.includes("Corporate")) {
-    return "/bank_logos/ContosoCorpBank.svg";
+  if (bankName.includes(APP_CONFIG.BANKS.FIRST.NAME)) {
+    return APP_CONFIG.BANKS.FIRST.LOGO;
+  } else if (bankName.includes(APP_CONFIG.BANKS.SECOND.NAME)) {
+    return APP_CONFIG.BANKS.SECOND.LOGO;
+  } else if (bankName.includes(APP_CONFIG.BANKS.THIRD.NAME)) {
+    return APP_CONFIG.BANKS.THIRD.LOGO;
   }  else {
-    return "/bank_logos/ContosoInvestment.svg";
+    return APP_CONFIG.BANKS.DEFAULT.LOGO;
   }
 }
 
