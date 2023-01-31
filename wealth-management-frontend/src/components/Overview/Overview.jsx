@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { getAddedBanks } from '../../services/banks-service';
 import { getAccounts, getInitialAccounts, getTransactions } from '../../services/account-transaction-service';
 import { CONSTANTS, getTokenFromCookieOrRetrieve } from '../../services/utils';
+import { APP_CONFIG } from '../../config';
 
 export const Overview = () => {
     
@@ -63,13 +64,13 @@ export const Overview = () => {
         let accountData = await fetchInitialAccounts(access_token);
 
         for await (let account of accountData) {
-            account.BankName = "Contoso Investment Bank";
-            account.BankCountry = "Wales";
+            account.BankName = APP_CONFIG.BANKS.DEFAULT.FULL_NAME;
+            account.BankCountry = APP_CONFIG.BANKS.DEFAULT.COUNTRY;
             upsertAccounts(account);
             let tranData = await fetchTransactions(access_token, account.AccountId);
 
             for await (let tran of tranData) {
-                tran.BankName = "Contoso Investment Bank";
+                tran.BankName = APP_CONFIG.BANKS.DEFAULT.FULL_NAME;
                 upsertTransactions(tran);
             }
             

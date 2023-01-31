@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Image } from "react-bootstrap";
 import avatar from "../../../assets/images/avatar.jpg";
+import { APP_CONFIG } from '../../../config';
 
 export const ProfileInfo = ({accounts}) => {
     
@@ -12,7 +13,7 @@ export const ProfileInfo = ({accounts}) => {
             .map(acc => parseFloat(acc?.Balance.replace("$", "")))
             .reduce((accumulator, bal) => accumulator + bal, 0);
         
-        setAssets(total);
+        setAssets(total.toFixed(2));
     }, [accounts]);
 
     return (
@@ -22,10 +23,10 @@ export const ProfileInfo = ({accounts}) => {
                     <Image roundedCircle={true} src={avatar} style={{height: "120px", width: "120px", "objectFit": "cover"}} />
                 </div>
                 <div className="profile-info-section">
-                    <h5> Alex Lim<span className="text-muted fs-6"> (alex_lim)</span> </h5>
-                    <span className="text-muted"><i className="fi fi-rr-briefcase"></i>Software Engineer</span><br/>
-                    <span className="text-muted"><i className="fi fi-rr-marker"></i>Bay Area, San Francisco, CA</span><br/>
-                    <span className="text-muted"><i className="bi bi-telephone"></i>alex_lim@email.com, +1 6316009029</span>
+                    <h5>{APP_CONFIG.USER.NAME}<span className="text-muted fs-6"> ({APP_CONFIG.USER.ID})</span> </h5>
+                    <span className="text-muted"><i className="fi fi-rr-briefcase"></i>{APP_CONFIG.USER.WORK}</span><br/>
+                    <span className="text-muted"><i className="fi fi-rr-marker"></i>{APP_CONFIG.USER.ADDRESS}</span><br/>
+                    <span className="text-muted"><i className="bi bi-telephone"></i>{APP_CONFIG.USER.EMAIL}, {APP_CONFIG.USER.MOBILE}</span>
                 </div>
             </div>
             <div className="empty"/>

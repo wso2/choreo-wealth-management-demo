@@ -76,7 +76,7 @@ service / on new http:Listener(9090) {
     # + customerId - unique identifier for customer
     # + bank - bank identifier
     # + return - AccountDetails resource.
-    resource function get accountdetails(string customerId = "Investment", string bank = "001") returns AccountDetails[]|error {
+    resource function get globalview(string customerId = "001", string bank = "Personal") returns AccountDetails[]|error {
 
         log:printInfo("get account details and transactions", customerId = customerId, bank = bank);
         wealthmanagementaccounts:Client accountsEndpoint = check new (config = {

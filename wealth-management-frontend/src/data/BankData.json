@@ -1,31 +1,27 @@
 {
     "banks": [
         {
-            "id": "1",
-            "name": "Contoso Retail Bank",
-            "logo": "bank_logos/ContosoRetailBank.svg",
-            "country": "Wales",
+            "id": "5",
+            "name": "SCB Personal Banking",
+            "country": "Thailand",
             "isAdded": false
         },
         {
-            "id": "2",
-            "name": "Contoso SME Bank",
-            "logo": "bank_logos/ContosoSMEBank.svg",
-            "country": "Scotland",
+            "id": "6",
+            "name": "SCB Asset Management",
+            "country": "Cambodia",
             "isAdded": false
         },
         {
-            "id": "3",
-            "name": "Contoso Corporate Bank",
-            "logo": "bank_logos/ContosoCorpBank.svg",
-            "country": "England",
+            "id": "7",
+            "name": "SCB Securities Bank",
+            "country": "Vietnam",
             "isAdded": false
         },
         {
-            "id": "4",
-            "name": "Contoso Investment Bank",
-            "logo": "bank_logos/ContosoInvestment.svg",
-            "country": "Wales",
+            "id": "8",
+            "name": "SCB Insurance Bank",
+            "country": "Singapore",
             "isAdded": false
         }
     ]
