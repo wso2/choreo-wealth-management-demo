@@ -71,6 +71,47 @@ service / on new http:Listener(9090) {
 
     }
 
+    # return a list of accounts for a particular customer.
+    # + customerId - unique identifier for customer
+    # + bank - bank name
+    # + return - AccountDetails resource.
+    resource function get globalview(string bank = "Investment", string customerId = "001") returns AccountDetails[]|error {
+
+        wealthmanagementaccounts:Client wealthmanagementaccountsEp = check new (config = {
+            auth: {
+                clientId: clientId,
+                clientSecret: clientSecret
+            }
+        });
+
+        log:printInfo("get account details and transactions", customerId = customerId, bank = bank);
+        wealthmanagementaccounts:Client accountsEndpoint = check new (config = {
+            auth: {
+                clientId: clientId,
+                clientSecret: clientSecret
+            }
+        });
+
+        wealthmanagementtransactions:Client transactionsEndpoint = check new (config = {
+            auth: {
+                clientId: clientId,
+                clientSecret: clientSecret
+            }
+        });
+
+        AccountDetails[] allAccountDetails = [];
+
+        wealthmanagementaccounts:AccountInformation[] getAccountsResponse = check accountsEndpoint->getAccounts(customerId = customerId, bank = bank);
+
+        foreach wealthmanagementaccounts:AccountInformation accountInformation in getAccountsResponse {
+            wealthmanagementtransactions:Transaction[] getTransactionsResponse = check transactionsEndpoint->getTransactions(accountInformation.AccountId);
+            AccountDetails accountDetails = transform(accountInformation, getTransactionsResponse);
+            allAccountDetails.push(accountDetails);
+        }
+
+        return allAccountDetails;
+
+    }
 }
 
 # combine a AccountInformation record and Transactions record to AccountDetails record to AccountDetails record.
