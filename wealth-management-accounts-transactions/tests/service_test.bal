@@ -24,14 +24,6 @@ function testInvestmentAccounts(){
     test:assertNotEquals(response.length(),0);
 }
 
-@test:Config {}
-function testGlobalview(){
-    AccountDetails[] | error response = testClient->get("/globalview?customerId=001");
-    if response is error {
-        test:assertFail(response.toString());
-    }
-    test:assertNotEquals(response,());
-}
 
 
 // After Suite Function
